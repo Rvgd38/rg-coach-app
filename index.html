@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>RG Coach App | Portal Administrativo</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Rajdhani:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <style>
+        :root {
+            --bg-main: #050505;
+            --bg-card: #151515;
+            --bg-card-light: #222222;
+            --neon-green: #39FF14;
+            --neon-green-dim: rgba(57, 255, 20, 0.15);
+            --text-main: #FFFFFF;
+            --text-muted: #888888;
+            --card-red: #8B2525;
+            --card-yellow: #D49A36;
+            --card-green: #3A7D22;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; -webkit-tap-highlight-color: transparent; }
+        
+        body { background-color: var(--bg-main); color: var(--text-main); overflow-x: hidden; padding-bottom: 80px; }
+
+        /* PANTALLA DE LOGIN (SUPERPUESTA INICIALMENTE) */
+        #login-screen {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
+            background: linear-gradient(rgba(5,5,5,0.9), rgba(5,5,5,0.95)), url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=1000&auto=format&fit=crop') center/cover;
+            display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 9999; padding: 20px;
+        }
+        .login-box { background: var(--bg-card); padding: 40px 30px; border-radius: 16px; width: 100%; max-width: 400px; border: 1px solid #333; box-shadow: 0 20px 50px rgba(0,0,0,0.8); text-align: center; }
+        .login-box h1 { font-family: 'Rajdhani', sans-serif; font-size: 32px; margin-bottom: 5px; }
+        .login-box h1 span { color: var(--neon-green); }
+        .login-box p { color: var(--text-muted); font-size: 14px; margin-bottom: 30px; }
+        .input-group { margin-bottom: 20px; text-align: left; }
+        .input-group label { display: block; font-size: 12px; color: var(--text-muted); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1px; }
+        .input-group input { width: 100%; background: #0a0a0a; border: 1px solid #333; color: #FFF; padding: 15px; border-radius: 8px; font-size: 16px; outline: none; transition: border 0.3s; }
+        .input-group input:focus { border-color: var(--neon-green); }
+        .btn-login { width: 100%; background: var(--neon-green); color: #000; padding: 15px; border: none; border-radius: 8px; font-size: 16px; font-weight: 700; cursor: pointer; text-transform: uppercase; letter-spacing: 1px; margin-top: 10px; transition: 0.3s; }
+        .btn-login:active { transform: scale(0.98); }
+
+        /* PANTALLA PRINCIPAL (APP) */
+        #app-screen { display: none; padding: 20px; max-width: 600px; margin: 0 auto; }
+
+        /* HEADER APP */
+        .app-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; margin-top: 10px; }
+        .user-profile { display: flex; align-items: center; gap: 15px; }
+        .avatar { width: 50px; height: 50px; border-radius: 50%; background: #222; border: 2px solid var(--neon-green); display: flex; justify-content: center; align-items: center; font-size: 20px; color: var(--neon-green); }
+        .greeting { font-size: 22px; font-weight: 700; font-family: 'Rajdhani', sans-serif; letter-spacing: 0.5px;}
+        .bell-icon { font-size: 24px; color: var(--text-main); position: relative; }
+        .bell-icon::after { content: ''; position: absolute; top: 0; right: 0; width: 10px; height: 10px; background: var(--neon-green); border-radius: 50%; border: 2px solid var(--bg-main); }
+
+        /* FECHA Y RUTINAS */
+        .date-selector { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+        .date-selector h3 { font-size: 18px; font-weight: 600; }
+        .date-controls { display: flex; gap: 15px; align-items: center; color: var(--text-muted); }
+        .btn-add { background: var(--neon-green); color: #000; width: 30px; height: 30px; border-radius: 6px; display: flex; justify-content: center; align-items: center; font-weight: bold; font-size: 18px; border: none; cursor: pointer;}
+        
+        .calendar-strip { display: flex; justify-content: space-between; margin-bottom: 20px; background: var(--bg-card); padding: 15px; border-radius: 12px; }
+        .day { display: flex; flex-direction: column; align-items: center; gap: 5px; font-size: 14px; color: var(--text-muted); }
+        .day.active { color: var(--neon-green); font-weight: bold; }
+        .day.active .num { background: var(--neon-green-dim); width: 30px; height: 30px; display: flex; justify-content: center; align-items: center; border-radius: 50%; border: 1px solid var(--neon-green); color: var(--neon-green);}
+
+        .menu-btn { background: var(--bg-card); padding: 20px; border-radius: 12px; display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; cursor: pointer; border: 1px solid #222; }
+        .menu-btn-left { display: flex; align-items: center; gap: 15px; }
+        .menu-icon { background: rgba(255,255,255,0.1); width: 40px; height: 40px; border-radius: 8px; display: flex; justify-content: center; align-items: center; font-size: 18px; color: var(--neon-green); }
+        .menu-text h4 { font-size: 16px; margin-bottom: 3px; }
+        .menu-text p { font-size: 12px; color: var(--text-muted); }
+
+        /* GRID DE TARJETAS (DASHBOARD) */
+        .dashboard-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 15px; }
+        
+        .card-stat { padding: 20px; border-radius: 12px; position: relative; overflow: hidden; display: flex; flex-direction: column; justify-content: space-between; min-height: 120px; }
+        
+        .card-red { background: var(--card-red); grid-row: span 2; }
+        .card-red h4 { font-size: 20px; margin-bottom: 10px; line-height: 1.2; }
+        .card-red p { font-size: 12px; opacity: 0.8; margin-bottom: 15px; }
+        .btn-upgrade { background: rgba(255,255,255,0.2); border: 1px solid rgba(255,255,255,0.4); color: #fff; padding: 10px; border-radius: 6px; width: 100%; font-weight: 600; text-align: center; }
+
+        .card-gray { background: var(--bg-card-light); }
+        .card-gray h4 { font-size: 14px; margin-bottom: 5px; color: var(--text-muted); }
+        .card-gray .number { font-size: 36px; font-weight: 700; position: absolute; right: 20px; top: 20px; }
+
+        .card-yellow { background: var(--card-yellow); color: #000; }
+        .card-yellow h4 { font-size: 15px; font-weight: 700; margin-bottom: 5px; }
+        .card-yellow p { font-size: 11px; opacity: 0.8; }
+        .card-yellow .number { font-size: 36px; font-weight: 700; position: absolute; right: 20px; top: 20px; }
+
+        /* TARJETA FINANCIERA GRANDE */
+        .card-finance { background: var(--card-green); padding: 25px 20px; border-radius: 12px; text-align: center; margin-bottom: 15px; }
+        .card-finance h4 { font-size: 14px; margin-bottom: 10px; font-weight: 600; }
+        .card-finance .amount { font-size: 42px; font-weight: 700; font-family: 'Rajdhani', sans-serif; letter-spacing: 1px; }
+        .card-finance p { font-size: 12px; font-style: italic; opacity: 0.8; margin-top: 5px; }
+
+        /* NAVEGACIÓN INFERIOR (BOTTOM NAV) */
+        .bottom-nav { position: fixed; bottom: 0; left: 0; width: 100%; background: #111111; display: flex; justify-content: space-around; align-items: center; padding: 15px 20px 25px 20px; border-top: 1px solid #222; z-index: 1000; }
+        .nav-item { color: var(--text-muted); font-size: 22px; cursor: pointer; transition: 0.3s; padding: 10px; }
+        .nav-item.active { background: var(--neon-green-dim); color: var(--neon-green); border-radius: 50%; width: 55px; height: 55px; display: flex; justify-content: center; align-items: center; transform: translateY(-15px); border: 2px solid var(--bg-main); }
+    </style>
+</head>
+<body>
+
+    <!-- PANTALLA DE LOGIN -->
+    <div id="login-screen">
+        <div class="login-box">
+            <h1>RG<span>App</span></h1>
+            <p>Portal exclusivo para Coach y Alumnos</p>
+            
+            <div class="input-group">
+                <label>Usuario / Email</label>
+                <input type="email" id="email" placeholder="coach@rodolfogonzalez.com">
+            </div>
+            <div class="input-group">
+                <label>Contraseña</label>
+                <input type="password" id="password" placeholder="••••••••">
+            </div>
+            
+            <button class="btn-login" onclick="iniciarSesion()">Ingresar</button>
+        </div>
+    </div>
+
+    <!-- PANTALLA PRINCIPAL (DASHBOARD) -->
+    <div id="app-screen">
+        
+        <div class="app-header">
+            <div class="user-profile">
+                <div class="avatar"><i class="fa-solid fa-user"></i></div>
+                <div class="greeting">Hola, Rodolfo</div>
+            </div>
+            <div class="bell-icon"><i class="fa-regular fa-bell"></i></div>
+        </div>
+
+        <div class="date-selector">
+            <h3>Junio 2026 <i class="fa-solid fa-chevron-down" style="font-size:12px; margin-left:5px; color:#888;"></i></h3>
+            <div class="date-controls">
+                <i class="fa-solid fa-chevron-left"></i>
+                <i class="fa-solid fa-chevron-right"></i>
+                <button class="btn-add"><i class="fa-solid fa-plus"></i></button>
+            </div>
+        </div>
+
+        <div class="calendar-strip">
+            <div class="day"><span class="name">lun</span><span class="num">15</span></div>
+            <div class="day active"><span class="name">mar</span><span class="num">16</span></div>
+            <div class="day"><span class="name">mié</span><span class="num">17</span></div>
+            <div class="day"><span class="name">jue</span><span class="num">18</span></div>
+            <div class="day"><span class="name">vie</span><span class="num">19</span></div>
+            <div class="day"><span class="name">sáb</span><span class="num">20</span></div>
+            <div class="day"><span class="name">dom</span><span class="num">21</span></div>
+        </div>
+
+        <div class="menu-btn">
+            <div class="menu-btn-left">
+                <div class="menu-icon"><i class="fa-solid fa-clipboard-list"></i></div>
+                <div class="menu-text">
+                    <h4>Rutinas</h4>
+                    <p>Crea y gestiona tus rutinas</p>
+                </div>
+            </div>
+            <i class="fa-solid fa-chevron-right" style="color:var(--text-muted);"></i>
+        </div>
+
+        <div class="dashboard-grid">
+            <!-- Tarjeta Roja -->
+            <div class="card-stat card-red">
+                <h4>Plan Premium<br>Activo</h4>
+                <p>Todos los recursos están desbloqueados. Tu ecosistema está operando al máximo nivel.</p>
+                <div class="btn-upgrade">Gestionar Plan</div>
+            </div>
+            
+            <!-- Tarjeta Gris -->
+            <div class="card-stat card-gray">
+                <h4>Alumnos Activos<br><span style="font-size:10px; font-weight:normal;">- desde el mes pasado</span></h4>
+                <div class="number">12</div>
+            </div>
+
+            <!-- Tarjeta Amarilla -->
+            <div class="card-stat card-yellow">
+                <h4>Invitaciones<br>Recibidas</h4>
+                <p>Si no las aceptas desaparecerán</p>
+                <div class="number">3</div>
+            </div>
+        </div>
+
+        <!-- Tarjeta Financiera -->
+        <div class="card-finance">
+            <h4>Recibidos del Mes</h4>
+            <div class="amount">US$ 960,00</div>
+            <p>- desde el mes pasado</p>
+        </div>
+
+    </div>
+
+    <!-- NAVBAR INFERIOR (VISIBLE SOLO AL ENTRAR) -->
+    <div class="bottom-nav" id="bottom-nav" style="display: none;">
+        <div class="nav-item"><i class="fa-solid fa-clipboard-list"></i></div>
+        <div class="nav-item"><i class="fa-solid fa-user-group"></i></div>
+        <div class="nav-item active"><i class="fa-solid fa-house"></i></div>
+        <div class="nav-item"><i class="fa-solid fa-comment-dots"></i></div>
+        <div class="nav-item"><i class="fa-solid fa-dollar-sign"></i></div>
+    </div>
+
+    <script>
+        // Lógica de transición de Pantallas (Frontend Mockup)
+        function iniciarSesion() {
+            // Simulamos la verificación de Firebase (que programaremos luego)
+            document.getElementById('login-screen').style.display = 'none';
+            document.getElementById('app-screen').style.display = 'block';
+            document.getElementById('bottom-nav').style.display = 'flex';
+            
+            // Hacemos scroll hacia arriba suavemente
+            window.scrollTo(0,0);
+        }
+    </script>
+</body>
+</html>
