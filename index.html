@@ -30,12 +30,7 @@
             background: radial-gradient(circle at top right, #111 0%, var(--bg-deep) 100%);
             display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 9999; padding: 20px;
         }
-        .login-glass {
-            background: var(--glass-bg); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-            padding: 50px 30px; border-radius: 24px; width: 100%; max-width: 380px;
-            border: 1px solid var(--glass-border); box-shadow: 0 30px 60px rgba(0,0,0,0.8);
-            text-align: center;
-        }
+        .login-glass { background: var(--glass-bg); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); padding: 50px 30px; border-radius: 24px; width: 100%; max-width: 380px; border: 1px solid var(--glass-border); box-shadow: 0 30px 60px rgba(0,0,0,0.8); text-align: center; }
         .logo-ring { width: 80px; height: 80px; border-radius: 50%; border: 2px dashed var(--text-sec); margin: 0 auto 20px auto; display: flex; justify-content: center; align-items: center; font-family: 'Rajdhani', sans-serif; font-size: 32px; font-weight: 700; color: var(--text-main); position: relative; }
         .logo-ring::after { content: ''; position: absolute; top: -5px; left: -5px; right: -5px; bottom: -5px; border-radius: 50%; border: 2px solid transparent; border-top-color: var(--neon-green); animation: spin 2s linear infinite; }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
@@ -58,13 +53,14 @@
         .greeting h2 { font-family: 'Inter', sans-serif; font-size: 16px; font-weight: 400; color: var(--text-sec); margin-bottom: 2px;}
         .greeting h1 { font-family: 'Rajdhani', sans-serif; font-size: 28px; font-weight: 700; }
         .greeting h1 span { color: var(--neon-green); }
-        .profile-btn { width: 45px; height: 45px; border-radius: 12px; background: var(--glass-bg); border: 1px solid var(--glass-border); display: flex; justify-content: center; align-items: center; color: var(--text-main); font-size: 18px; position: relative;}
+        .profile-btn { width: 45px; height: 45px; border-radius: 12px; background: var(--glass-bg); border: 1px solid var(--glass-border); display: flex; justify-content: center; align-items: center; color: var(--text-main); font-size: 18px; position: relative; cursor:pointer;}
         
-        /* DASHBOARD - ELEMENTOS */
+        /* DASHBOARD */
         .quick-actions { display: flex; gap: 15px; overflow-x: auto; padding-bottom: 15px; margin-bottom: 20px; scrollbar-width: none; }
         .quick-actions::-webkit-scrollbar { display: none; }
-        .action-pill { background: var(--glass-bg); border: 1px solid var(--glass-border); padding: 12px 20px; border-radius: 30px; display: flex; align-items: center; gap: 10px; white-space: nowrap; font-size: 14px; font-weight: 600; transition: 0.3s; }
+        .action-pill { background: var(--glass-bg); border: 1px solid var(--glass-border); padding: 12px 20px; border-radius: 30px; display: flex; align-items: center; gap: 10px; white-space: nowrap; font-size: 14px; font-weight: 600; transition: 0.3s; cursor:pointer;}
         .action-pill i { color: var(--neon-green); }
+        .action-pill.primary { background: rgba(57, 255, 20, 0.1); border-color: var(--neon-green); color: var(--neon-green); }
         
         .finance-core { background: linear-gradient(135deg, rgba(20,20,20,0.8) 0%, rgba(10,10,10,0.9) 100%); border: 1px solid #333; border-top: 2px solid var(--neon-green); border-radius: 20px; padding: 30px 25px; margin-bottom: 30px; position: relative; box-shadow: 0 20px 40px rgba(0,0,0,0.5); }
         .finance-core p { color: var(--text-sec); font-size: 13px; text-transform: uppercase; margin-bottom: 5px; }
@@ -78,24 +74,34 @@
         .metric-title { color: var(--text-sec); font-size: 13px; margin-top: 15px; }
         .metric-value { font-family: 'Rajdhani', sans-serif; font-size: 32px; font-weight: 700; margin-top: 5px; }
 
-        /* PANTALLA ALUMNOS - ESTILOS */
+        /* PANTALLA ALUMNOS */
         .search-bar { position: relative; margin-bottom: 25px; }
         .search-bar i { position: absolute; left: 15px; top: 50%; transform: translateY(-50%); color: var(--text-sec); }
-        .search-bar input { width: 100%; background: transparent; border: 1px solid #333; color: #FFF; padding: 15px 15px 15px 45px; border-radius: 30px; font-size: 15px; outline: none; }
+        .search-bar input { width: 100%; background: rgba(255,255,255,0.05); border: 1px solid #333; color: #FFF; padding: 15px 15px 15px 45px; border-radius: 30px; font-size: 15px; outline: none; }
         .search-bar input:focus { border-color: var(--neon-green); }
 
-        .student-card { background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 16px; padding: 20px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
+        .student-card { background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 16px; padding: 20px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; cursor: pointer; transition: 0.3s;}
+        .student-card:active { transform: scale(0.98); border-color: var(--neon-green); }
         .student-info-group { display: flex; align-items: center; gap: 15px; }
-        .student-avatar { width: 50px; height: 50px; border-radius: 50%; background: #222; border: 2px solid var(--neon-green); display: flex; justify-content: center; align-items: center; font-family: 'Rajdhani', sans-serif; font-size: 22px; font-weight: 700; }
-        .student-details h3 { font-family: 'Inter', sans-serif; font-size: 16px; color: #FFF; margin-bottom: 3px; text-transform: none; letter-spacing: normal;}
+        .student-avatar { width: 50px; height: 50px; border-radius: 50%; background: #222; border: 2px solid var(--neon-green); display: flex; justify-content: center; align-items: center; font-family: 'Rajdhani', sans-serif; font-size: 22px; font-weight: 700; text-transform: uppercase;}
+        .student-details h3 { font-family: 'Inter', sans-serif; font-size: 16px; color: #FFF; margin-bottom: 3px; }
         .student-details p { font-size: 13px; color: var(--text-sec); }
         .student-action { color: var(--text-sec); font-size: 20px; padding: 10px; }
 
-        .btn-primary { width: 100%; background: var(--neon-green); color: #000; padding: 16px; border: none; border-radius: 12px; font-size: 15px; font-weight: 700; display: flex; justify-content: center; align-items: center; gap: 10px; margin-top: 20px; cursor: pointer; }
+        .btn-primary { width: 100%; background: var(--neon-green); color: #000; padding: 16px; border: none; border-radius: 12px; font-size: 15px; font-weight: 700; display: flex; justify-content: center; align-items: center; gap: 10px; margin-top: 20px; cursor: pointer; transition: 0.3s;}
+        .btn-primary:active { transform: scale(0.98); }
 
-        /* NAVEGACIÓN INFERIOR FLOTANTE */
+        /* MODAL AGREGAR ALUMNO */
+        #modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background: rgba(0,0,0,0.8); backdrop-filter: blur(5px); z-index: 2000; display: none; justify-content: center; align-items: flex-end; }
+        .modal-content { background: var(--bg-panel); width: 100%; max-width: 600px; padding: 30px 20px; border-radius: 24px 24px 0 0; border-top: 1px solid #333; animation: slideUp 0.3s ease; }
+        @keyframes slideUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
+        .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; }
+        .modal-header h3 { font-size: 20px; }
+        .close-modal { background: #222; border: none; width: 35px; height: 35px; border-radius: 50%; color: #FFF; font-size: 16px; cursor: pointer; }
+
+        /* NAVEGACIÓN INFERIOR */
         .floating-nav-wrapper { position: fixed; bottom: 20px; left: 0; width: 100%; display: flex; justify-content: center; z-index: 1000; pointer-events: none; }
-        .floating-nav { background: rgba(15, 15, 15, 0.85); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); border: 1px solid rgba(255,255,255,0.1); border-radius: 40px; display: flex; justify-content: space-between; align-items: center; padding: 10px 25px; width: 90%; max-width: 400px; box-shadow: 0 20px 40px rgba(0,0,0,0.9); pointer-events: auto; }
+        .floating-nav { background: rgba(15, 15, 15, 0.9); backdrop-filter: blur(15px); border: 1px solid rgba(255,255,255,0.1); border-radius: 40px; display: flex; justify-content: space-between; align-items: center; padding: 10px 25px; width: 90%; max-width: 400px; box-shadow: 0 20px 40px rgba(0,0,0,0.9); pointer-events: auto; }
         .nav-icon { color: var(--text-sec); font-size: 20px; padding: 12px 15px; cursor: pointer; transition: 0.3s; position: relative; }
         .nav-icon.active { color: var(--neon-green); }
         .nav-icon.active::after { content: ''; position: absolute; bottom: 5px; left: 50%; transform: translateX(-50%); width: 4px; height: 4px; background: var(--neon-green); border-radius: 50%; }
@@ -120,7 +126,7 @@
         </div>
     </div>
 
-    <!-- PANTALLA 1: DASHBOARD PRINCIPAL -->
+    <!-- DASHBOARD PRINCIPAL -->
     <div id="screen-dashboard" class="screen">
         <div class="app-header">
             <div class="greeting">
@@ -146,27 +152,20 @@
         <div class="metrics-grid">
             <div class="metric-card">
                 <div class="metric-header"><div class="metric-icon green"><i class="fa-solid fa-users"></i></div></div>
-                <div><div class="metric-title">Alumnos Activos</div><div class="metric-value">0</div></div>
+                <div><div class="metric-title">Alumnos Activos</div><div class="metric-value" id="dashboard-student-count">0</div></div>
             </div>
             <div class="metric-card">
                 <div class="metric-header"><div class="metric-icon"><i class="fa-solid fa-microscope"></i></div></div>
                 <div><div class="metric-title">Evaluaciones</div><div class="metric-value">0</div></div>
             </div>
-            <div class="metric-card large">
-                <div class="metric-icon" style="margin-right: 15px;"><i class="fa-solid fa-clipboard-check"></i></div>
-                <div style="flex:1;">
-                    <div class="metric-value" style="font-size: 22px;">Rutinas Asignadas</div>
-                    <div class="metric-title" style="margin-top: 0;">Ningún plan pendiente</div>
-                </div>
-            </div>
         </div>
     </div>
 
-    <!-- PANTALLA 2: GESTOR DE ALUMNOS -->
+    <!-- GESTOR DE ALUMNOS -->
     <div id="screen-students" class="screen">
         <div class="app-header">
             <div class="greeting">
-                <h2>Gestión de Base de Datos</h2>
+                <h2>Base de Datos</h2>
                 <h1>Mis <span>Alumnos</span></h1>
             </div>
             <div class="profile-btn" style="background: var(--neon-glow); color: var(--neon-green); border-color: var(--neon-green);">
@@ -179,25 +178,36 @@
             <input type="text" placeholder="Buscar alumno por nombre...">
         </div>
 
-        <!-- Lista de Alumnos (Dinámica en el futuro) -->
+        <!-- LISTA DE ALUMNOS CONECTADA A FIREBASE -->
         <div id="students-list">
-            <!-- Ejemplo visual de cómo se verá un alumno -->
-            <div class="student-card">
-                <div class="student-info-group">
-                    <div class="student-avatar">M</div>
-                    <div class="student-details">
-                        <h3>Miguel Ángel</h3>
-                        <p>Plan Premium • Al día</p>
-                    </div>
-                </div>
-                <div class="student-action"><i class="fa-solid fa-chevron-right"></i></div>
-            </div>
+            <p style="text-align:center; color:#555; margin-top:30px; font-size:14px;">Cargando base de datos...</p>
         </div>
 
-        <button class="btn-primary"><i class="fa-solid fa-plus"></i> Agregar Nuevo Alumno</button>
+        <button class="btn-primary" onclick="abrirModalAlumno()"><i class="fa-solid fa-plus"></i> Agregar Nuevo Alumno</button>
     </div>
 
-    <!-- PÍLDORA DE NAVEGACIÓN FLOTANTE -->
+    <!-- MODAL AGREGAR ALUMNO -->
+    <div id="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Crear Perfil de Alumno</h3>
+                <button class="close-modal" onclick="cerrarModalAlumno()"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            
+            <div class="input-line">
+                <i class="fa-solid fa-user"></i>
+                <input type="text" id="new-student-name" placeholder="Nombre completo del alumno">
+            </div>
+            <div class="input-line">
+                <i class="fa-brands fa-whatsapp"></i>
+                <input type="number" id="new-student-phone" placeholder="Número de WhatsApp">
+            </div>
+            
+            <button class="btn-primary" id="btn-save-student" onclick="guardarAlumno()">Guardar en Base de Datos</button>
+        </div>
+    </div>
+
+    <!-- NAVEGACIÓN INFERIOR -->
     <div class="floating-nav-wrapper" id="bottom-nav" style="display: none;">
         <div class="floating-nav">
             <div class="nav-icon"><i class="fa-solid fa-dumbbell"></i></div>
@@ -207,13 +217,13 @@
         </div>
     </div>
 
-    <!-- FIREBASE Y LÓGICA DE LA APP -->
+    <!-- FIREBASE MODULES -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
         import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-        import { getFirestore } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+        import { getFirestore, collection, addDoc, onSnapshot, serverTimestamp, query, orderBy } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-        // TUS LLAVES DE LA BÓVEDA
+        // CONFIGURACIÓN EXACTA
         const firebaseConfig = {
           apiKey: "AIzaSyAy4lOulqCr8jHTiwpmn8YBP3ATNbP68d4",
           authDomain: "rg-coach-app.firebaseapp.com",
@@ -225,18 +235,17 @@
 
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
-        const db = getFirestore(app); // Base de datos conectada
+        const db = getFirestore(app);
 
-        // SISTEMA DE LOGIN
+        // LOGIN
         window.iniciarSesion = function() {
             const emailInput = document.getElementById('email').value;
             const passwordInput = document.getElementById('password').value;
             const btnAuth = document.getElementById('btnLogin');
 
-            if(!emailInput || !passwordInput) { alert("⚠️ Ingresa correo y contraseña."); return; }
+            if(!emailInput || !passwordInput) return alert("⚠️ Ingresa correo y contraseña.");
 
-            btnAuth.innerText = "VERIFICANDO...";
-            btnAuth.style.opacity = "0.5";
+            btnAuth.innerText = "VERIFICANDO..."; btnAuth.style.opacity = "0.5";
 
             signInWithEmailAndPassword(auth, emailInput, passwordInput)
                 .then((userCredential) => {
@@ -246,30 +255,94 @@
                         login.style.display = 'none';
                         document.getElementById('screen-dashboard').style.display = 'block';
                         document.getElementById('bottom-nav').style.display = 'flex';
+                        cargarAlumnosTiempoReal(); // Inicia la escucha a la BD
                     }, 500);
                 })
                 .catch((error) => {
                     alert("⛔ ACCESO DENEGADO");
-                    btnAuth.innerText = "DESBLOQUEAR PANEL";
-                    btnAuth.style.opacity = "1";
+                    btnAuth.innerText = "DESBLOQUEAR PANEL"; btnAuth.style.opacity = "1";
                 });
         }
 
-        // SISTEMA DE NAVEGACIÓN (RUTEO INTERNO)
+        // NAVEGACIÓN
         window.navTo = function(screenId) {
-            // Ocultar todas las pantallas
             document.querySelectorAll('.screen').forEach(s => s.style.display = 'none');
-            // Mostrar la seleccionada
             document.getElementById(screenId).style.display = 'block';
             window.scrollTo(0,0);
 
-            // Actualizar color de los iconos de abajo
             document.querySelectorAll('.nav-icon').forEach(icon => icon.classList.remove('active'));
-            if(screenId === 'screen-dashboard') {
-                document.getElementById('nav-btn-home').classList.add('active');
-            } else if (screenId === 'screen-students') {
-                document.getElementById('nav-btn-students').classList.add('active');
+            if(screenId === 'screen-dashboard') document.getElementById('nav-btn-home').classList.add('active');
+            else if (screenId === 'screen-students') document.getElementById('nav-btn-students').classList.add('active');
+        }
+
+        // CONTROL DEL MODAL
+        window.abrirModalAlumno = function() { document.getElementById('modal-overlay').style.display = 'flex'; }
+        window.cerrarModalAlumno = function() { document.getElementById('modal-overlay').style.display = 'none'; }
+
+        // GUARDAR ALUMNO EN FIREBASE
+        window.guardarAlumno = async function() {
+            const nombre = document.getElementById('new-student-name').value;
+            const telefono = document.getElementById('new-student-phone').value;
+            const btn = document.getElementById('btn-save-student');
+
+            if(!nombre) return alert("El nombre del alumno es obligatorio.");
+
+            btn.innerText = "Guardando..."; btn.style.opacity = "0.5";
+
+            try {
+                // Guarda en la colección "alumnos" en Google Firestore
+                await addDoc(collection(db, "alumnos"), {
+                    nombre: nombre,
+                    telefono: telefono,
+                    estado: "Activo",
+                    fechaIngreso: serverTimestamp()
+                });
+                
+                // Limpia y cierra
+                document.getElementById('new-student-name').value = '';
+                document.getElementById('new-student-phone').value = '';
+                cerrarModalAlumno();
+                btn.innerText = "Guardar en Base de Datos"; btn.style.opacity = "1";
+                
+            } catch (e) {
+                alert("Error de conexión: " + e.message);
+                btn.innerText = "Reintentar"; btn.style.opacity = "1";
             }
+        }
+
+        // CARGAR ALUMNOS EN TIEMPO REAL
+        function cargarAlumnosTiempoReal() {
+            const q = query(collection(db, "alumnos"), orderBy("fechaIngreso", "desc"));
+            
+            onSnapshot(q, (snapshot) => {
+                const list = document.getElementById('students-list');
+                list.innerHTML = ""; // Limpia la lista actual
+                
+                // Actualiza el contador del Dashboard
+                document.getElementById('dashboard-student-count').innerText = snapshot.size;
+
+                if(snapshot.empty) {
+                    list.innerHTML = `<p style="text-align:center; color:#555; margin-top:30px;">Aún no tienes alumnos registrados.</p>`;
+                    return;
+                }
+
+                snapshot.forEach((doc) => {
+                    const data = doc.data();
+                    const inicial = data.nombre.charAt(0);
+                    
+                    list.innerHTML += `
+                    <div class="student-card">
+                        <div class="student-info-group">
+                            <div class="student-avatar">${inicial}</div>
+                            <div class="student-details">
+                                <h3>${data.nombre}</h3>
+                                <p>Ingreso Reciente • Activo</p>
+                            </div>
+                        </div>
+                        <div class="student-action"><i class="fa-solid fa-chevron-right"></i></div>
+                    </div>`;
+                });
+            });
         }
     </script>
 </body>
