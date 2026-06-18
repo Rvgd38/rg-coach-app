@@ -94,6 +94,7 @@
         .finance-banner .value { font-family: 'Rajdhani', sans-serif; font-size: 32px; font-weight: 700; color: #FFF; }
         .badge-pending { color: var(--card-yellow); font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; }
 
+        /* CAJAS DE VISUALIZACIÓN DE PLANES (RUTINA Y DIETA) */
         .routine-display-box { background: rgba(255,255,255,0.02); border: 1px solid #222; border-radius: 12px; padding: 20px; margin-top: 15px; display: none; position: relative;}
         .routine-header-box { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; border-bottom: 1px solid #333; padding-bottom: 10px;}
         .routine-header-box h4 { color: var(--neon-green); font-family: 'Rajdhani', sans-serif; font-size: 18px; text-transform: uppercase; margin: 0;}
@@ -101,34 +102,27 @@
         .btn-edit-routine:active { border-color: var(--neon-green); color: var(--neon-green); }
         .routine-display-box pre { font-family: 'Inter', sans-serif; font-size: 14px; color: #DDD; white-space: pre-wrap; word-wrap: break-word; line-height: 1.6; margin: 0; }
 
-        /* =========================================
-           LIBRERÍA DE EJERCICIOS (NUEVO ENCUADRE DE FOTOS)
-           ========================================= */
+        /* LIBRERÍA DE EJERCICIOS */
         .library-tabs-modern { display: flex; gap: 30px; overflow-x: auto; margin-bottom: 30px; scrollbar-width: none; border-bottom: 1px solid #222; }
         .library-tabs-modern::-webkit-scrollbar { display: none; }
         .tab-clean { padding-bottom: 15px; color: var(--text-sec); font-size: 15px; font-weight: 600; white-space: nowrap; cursor: pointer; position: relative; text-transform: uppercase; letter-spacing: 1px;}
         .tab-clean.active { color: var(--text-main); }
         .tab-clean.active::after { content: ''; position: absolute; bottom: -1px; left: 0; width: 100%; height: 2px; background: var(--neon-green); box-shadow: 0 -2px 10px var(--neon-glow);}
         
-        /* Modificado: Altura mayor (240px) para mostrar más cuerpo en fotos verticales */
         .cinematic-card { position: relative; height: 240px; border-radius: 16px; margin-bottom: 20px; overflow: hidden; display: flex; align-items: flex-end; padding: 20px; border: 1px solid #222; }
         .cinematic-card::before { content: ''; position: absolute; top:0; left:0; width:100%; height:100%; background: linear-gradient(to top, rgba(0,0,0,0.95) 10%, rgba(0,0,0,0.1) 100%); z-index: 1; }
-        
-        /* Modificado: object-position: center 20% enfoca el rostro y pecho, no el estómago */
         .cine-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 20%; z-index: 0; filter: grayscale(10%); transition: 0.5s; }
         .cinematic-card:active .cine-bg { transform: scale(1.05); filter: grayscale(0%); }
-
         .cine-content { position: relative; z-index: 2; width: 100%; display: flex; justify-content: space-between; align-items: flex-end;}
         .cine-info h4 { font-family: 'Rajdhani', sans-serif; font-size: 26px; font-weight: 700; color: #FFF; margin-bottom: 8px; line-height: 1.1; text-transform: uppercase; text-shadow: 0 2px 10px rgba(0,0,0,0.8);}
         .cine-tags { display: flex; gap: 10px; }
         .cine-tag { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--neon-green); background: rgba(0,0,0,0.8); padding: 3px 8px; border-radius: 4px;}
-        
         .btn-delete-ex { position: absolute; top: 15px; right: 15px; background: rgba(204, 51, 51, 0.8); color: #FFF; border: none; border-radius: 8px; width: 35px; height: 35px; display: flex; justify-content: center; align-items: center; z-index: 10; cursor: pointer; backdrop-filter: blur(5px); transition: 0.3s;}
         .btn-delete-ex:active { transform: scale(0.9); background: #cc3333; }
 
         /* MODALES GLOBAL */
         .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background: rgba(0,0,0,0.9); backdrop-filter: blur(10px); z-index: 3000; display: none; justify-content: center; align-items: center; padding: 20px;}
-        .modal-content { background: var(--bg-deep); width: 100%; max-width: 400px; padding: 30px; border: 1px solid #333; border-radius: 24px; animation: scaleIn 0.3s ease; }
+        .modal-content { background: var(--bg-deep); width: 100%; max-width: 400px; padding: 30px; border: 1px solid #333; border-radius: 24px; animation: scaleIn 0.3s ease; max-height: 90vh; overflow-y: auto;}
         @keyframes scaleIn { from { transform: scale(0.9); opacity: 0; } to { transform: scale(1); opacity: 1; } }
         .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; }
         .modal-header h3 { font-family: 'Rajdhani', sans-serif; font-size: 24px; color: var(--neon-green); }
@@ -136,7 +130,6 @@
         
         textarea.routine-input { width: 100%; height: 250px; background: rgba(0,0,0,0.5); border: 1px solid #333; color: #FFF; padding: 15px; border-radius: 12px; font-size: 14px; outline: none; resize: none; margin-bottom: 20px; font-family: 'Inter', sans-serif; }
         textarea.routine-input:focus { border-color: var(--neon-green); }
-        
         select.finance-select { width: 100%; background: rgba(0,0,0,0.5); border: 1px solid #333; color: #FFF; padding: 15px; border-radius: 12px; font-size: 15px; outline: none; margin-bottom: 20px; }
 
         /* NAVBAR INFERIOR */
@@ -189,19 +182,13 @@
         <div class="metrics-grid">
             <div class="metric-card">
                 <div class="metric-icon green"><i class="fa-solid fa-user-astronaut"></i></div>
-                <div>
-                    <div class="metric-value" id="dashboard-student-count">0</div>
-                    <div class="metric-title">ALUMNOS ACTIVOS</div>
-                </div>
+                <div><div class="metric-value" id="dashboard-student-count">0</div><div class="metric-title">ALUMNOS ACTIVOS</div></div>
             </div>
             <div class="metric-card">
                 <div class="metric-icon"><i class="fa-solid fa-file-medical"></i></div>
-                <div>
-                    <div class="metric-value">0</div>
-                    <div class="metric-title">EVALUACIONES</div>
-                </div>
+                <div><div class="metric-value">0</div><div class="metric-title">EVALUACIONES</div></div>
             </div>
-            <div class="metric-card large" onclick="navTo('screen-library')" style="cursor:pointer;">
+            <div class="metric-card large" onclick="navTo('screen-library')">
                 <div class="metric-icon" style="margin-right: 20px;"><i class="fa-solid fa-dumbbell"></i></div>
                 <div style="flex:1;">
                     <div class="metric-value" style="font-size: 24px;">Base Técnica</div>
@@ -219,18 +206,13 @@
                 <h2>Base de Datos</h2>
                 <h1>Mis <span>Alumnos</span></h1>
             </div>
-            <div class="profile-btn" style="color: var(--neon-green); border-color: var(--neon-green);">
-                <i class="fa-solid fa-users"></i>
-            </div>
+            <div class="profile-btn" style="color: var(--neon-green); border-color: var(--neon-green);"><i class="fa-solid fa-users"></i></div>
         </div>
-        
         <div class="search-bar-modern">
             <i class="fa-solid fa-magnifying-glass"></i>
             <input type="text" placeholder="Buscar por nombre o ID...">
         </div>
-
         <div id="students-list"><p style="text-align:center; color:#444; margin-top:40px; font-family:'Rajdhani'; font-size:18px; text-transform:uppercase;">Conectando al servidor...</p></div>
-        
         <button class="btn-primary" onclick="abrirModal('modal-add-student')">Registrar Nuevo Alumno</button>
     </div>
 
@@ -257,14 +239,14 @@
         </div>
 
         <div class="finance-banner" id="profile-finance-banner" onclick="abrirModalFinanzas()">
-            <div>
-                <h4>Mensualidad</h4>
-                <div class="value" id="profile-mensualidad">US$ 0,00</div>
-            </div>
+            <div><h4>Mensualidad</h4><div class="value" id="profile-mensualidad">US$ 0,00</div></div>
             <div class="badge-pending" id="profile-estado-pago">PENDIENTE</div>
         </div>
 
+        <!-- MÓDULOS FÍSICO Y NUTRICIONAL -->
         <div class="metrics-grid" style="grid-template-columns: 1fr;">
+            
+            <!-- RUTINA -->
             <div class="metric-card large" id="btn-asignar-rutina" onclick="abrirModalRutina()" style="cursor:pointer; display:none;">
                 <div class="metric-icon" style="margin-right: 20px;"><i class="fa-solid fa-file-waveform"></i></div>
                 <div style="flex:1;">
@@ -272,38 +254,48 @@
                     <div class="metric-title" style="margin-top: 5px;">Presiona para asignar rutina</div>
                 </div>
             </div>
-        </div>
-
-        <div id="routine-display-area" class="routine-display-box">
-            <div class="routine-header-box">
-                <h4>Rutina Actual</h4>
-                <button onclick="abrirModalRutina()" class="btn-edit-routine"><i class="fa-solid fa-pen"></i> Editar</button>
+            <div id="routine-display-area" class="routine-display-box">
+                <div class="routine-header-box">
+                    <h4>Rutina Actual</h4>
+                    <button onclick="abrirModalRutina()" class="btn-edit-routine"><i class="fa-solid fa-pen"></i> Editar</button>
+                </div>
+                <pre id="routine-text-content"></pre>
             </div>
-            <pre id="routine-text-content"></pre>
+
+            <!-- NUTRICIÓN (NUEVO) -->
+            <div class="metric-card large" id="btn-asignar-dieta" onclick="abrirModalDieta()" style="cursor:pointer; display:none; border-left-color: var(--card-yellow); background: rgba(212, 154, 54, 0.05);">
+                <div class="metric-icon" style="margin-right: 20px; color: var(--card-yellow); background: rgba(212, 154, 54, 0.15);"><i class="fa-solid fa-apple-whole"></i></div>
+                <div style="flex:1;">
+                    <div class="metric-value" style="font-size: 20px;">Plan Nutricional</div>
+                    <div class="metric-title" style="margin-top: 5px;">Presiona para asignar dieta</div>
+                </div>
+            </div>
+            <div id="diet-display-area" class="routine-display-box" style="border-left-color: var(--card-yellow);">
+                <div class="routine-header-box" style="border-bottom-color: #333;">
+                    <h4 style="color: var(--card-yellow);">Nutrición Actual</h4>
+                    <button onclick="abrirModalDieta()" class="btn-edit-routine" style="color: var(--card-yellow); border-color: #444;"><i class="fa-solid fa-pen"></i> Editar</button>
+                </div>
+                <pre id="diet-text-content"></pre>
+            </div>
+
         </div>
     </div>
 
-    <!-- PANTALLA 4: LIBRERÍA DE EJERCICIOS -->
+    <!-- PANTALLA 4: LIBRERÍA -->
     <div id="screen-library" class="screen">
         <div class="app-header">
             <div class="greeting">
                 <h2>Archivos Maestros</h2>
                 <h1>Base <span>Técnica</span></h1>
             </div>
-            <div class="profile-btn" style="color: var(--neon-green); border-color: var(--neon-green);">
-                <i class="fa-solid fa-database"></i>
-            </div>
+            <div class="profile-btn" style="color: var(--neon-green); border-color: var(--neon-green);"><i class="fa-solid fa-database"></i></div>
         </div>
         <div class="library-tabs-modern">
             <div class="tab-clean">Protocolos</div>
             <div class="tab-clean active">Ejercicios</div>
             <div class="tab-clean">Nutrición</div>
         </div>
-        
-        <div id="exercise-list">
-            <p style="text-align:center; color:#444; margin-top:40px; font-family:'Rajdhani'; font-size:18px; text-transform:uppercase;">Cargando base técnica...</p>
-        </div>
-
+        <div id="exercise-list"><p style="text-align:center; color:#444; margin-top:40px; font-family:'Rajdhani'; font-size:18px; text-transform:uppercase;">Cargando base técnica...</p></div>
         <button class="btn-primary" style="margin-top:10px;" onclick="abrirModal('modal-add-exercise')">Registrar Nuevo Movimiento</button>
     </div>
 
@@ -314,40 +306,46 @@
                 <h3>Nuevo Expediente</h3>
                 <button class="close-modal" onclick="cerrarModal('modal-add-student')"><i class="fa-solid fa-xmark"></i></button>
             </div>
-            <div class="input-line">
-                <i class="fa-solid fa-user"></i>
-                <input type="text" id="new-student-name" placeholder="Nombre completo">
-            </div>
-            <div class="input-line">
-                <i class="fa-brands fa-whatsapp"></i>
-                <input type="number" id="new-student-phone" placeholder="WhatsApp (ej. 58414...)">
-            </div>
+            <div class="input-line"><i class="fa-solid fa-user"></i><input type="text" id="new-student-name" placeholder="Nombre completo"></div>
+            <div class="input-line"><i class="fa-brands fa-whatsapp"></i><input type="number" id="new-student-phone" placeholder="WhatsApp (ej. 58414...)"></div>
             <button class="btn-auth" id="btn-save-student" onclick="guardarAlumno()">Guardar en Nube</button>
         </div>
     </div>
 
+    <!-- Modal Rutina -->
     <div id="modal-add-routine" class="modal-overlay">
         <div class="modal-content">
             <div class="modal-header">
                 <h3>Editor de Protocolo</h3>
                 <button class="close-modal" onclick="cerrarModal('modal-add-routine')"><i class="fa-solid fa-xmark"></i></button>
             </div>
-            <p style="color:var(--text-sec); font-size:12px; margin-bottom:15px; text-transform:uppercase;">Puedes pegar o editar el texto libremente</p>
+            <p style="color:var(--text-sec); font-size:12px; margin-bottom:15px; text-transform:uppercase;">Pega aquí la rutina de tu IA</p>
             <textarea id="routine-input-area" class="routine-input" placeholder="Ej: Día 1 - Pecho y Tríceps..."></textarea>
             <button class="btn-auth" id="btn-save-routine" onclick="guardarRutina()">Guardar Cambios</button>
         </div>
     </div>
 
+    <!-- Modal Dieta (NUEVO) -->
+    <div id="modal-add-diet" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 style="color: var(--card-yellow);">Plan Nutricional</h3>
+                <button class="close-modal" onclick="cerrarModal('modal-add-diet')"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <p style="color:var(--text-sec); font-size:12px; margin-bottom:15px; text-transform:uppercase;">Macros y estructura alimenticia</p>
+            <textarea id="diet-input-area" class="routine-input" placeholder="Ej: Desayuno: 3 huevos, 100g avena..." style="border-color: #333;"></textarea>
+            <button class="btn-auth" id="btn-save-diet" onclick="guardarDieta()" style="background: var(--card-yellow); color: #000;">Guardar Nutrición</button>
+        </div>
+    </div>
+
+    <!-- Modal Finanzas -->
     <div id="modal-finance" class="modal-overlay">
         <div class="modal-content">
             <div class="modal-header">
                 <h3>Control Financiero</h3>
                 <button class="close-modal" onclick="cerrarModal('modal-finance')"><i class="fa-solid fa-xmark"></i></button>
             </div>
-            <div class="input-line">
-                <i class="fa-solid fa-dollar-sign"></i>
-                <input type="number" id="finance-amount" placeholder="Monto mensual (Ej. 80)">
-            </div>
+            <div class="input-line"><i class="fa-solid fa-dollar-sign"></i><input type="number" id="finance-amount" placeholder="Monto mensual (Ej. 80)"></div>
             <select id="finance-status" class="finance-select">
                 <option value="Pendiente">PENDIENTE</option>
                 <option value="Pagado">PAGADO</option>
@@ -356,29 +354,18 @@
         </div>
     </div>
 
+    <!-- Modal Ejercicio -->
     <div id="modal-add-exercise" class="modal-overlay">
         <div class="modal-content">
             <div class="modal-header">
                 <h3>Nuevo Ejercicio</h3>
                 <button class="close-modal" onclick="cerrarModal('modal-add-exercise')"><i class="fa-solid fa-xmark"></i></button>
             </div>
-            <div class="input-line">
-                <i class="fa-solid fa-dumbbell"></i>
-                <input type="text" id="ex-name" placeholder="Nombre (Ej. Sentadilla Búlgara)">
-            </div>
-            <div class="input-line">
-                <i class="fa-solid fa-child-reaching"></i>
-                <input type="text" id="ex-muscle" placeholder="Músculo (Ej. Glúteo)">
-            </div>
-            <div class="input-line">
-                <i class="fa-solid fa-bullseye"></i>
-                <input type="text" id="ex-focus" placeholder="Enfoque (Ej. Hipertrofia)">
-            </div>
-            <p style="color:var(--text-sec); font-size:11px; margin-bottom:10px;">URL de imagen (Déjalo en blanco para usar la genérica)</p>
-            <div class="input-line">
-                <i class="fa-solid fa-image"></i>
-                <input type="text" id="ex-img" placeholder="Nombre de archivo (ej. mifoto.jpeg)">
-            </div>
+            <div class="input-line"><i class="fa-solid fa-dumbbell"></i><input type="text" id="ex-name" placeholder="Nombre (Ej. Sentadilla Búlgara)"></div>
+            <div class="input-line"><i class="fa-solid fa-child-reaching"></i><input type="text" id="ex-muscle" placeholder="Músculo (Ej. Glúteo)"></div>
+            <div class="input-line"><i class="fa-solid fa-bullseye"></i><input type="text" id="ex-focus" placeholder="Enfoque (Ej. Hipertrofia)"></div>
+            <p style="color:var(--text-sec); font-size:11px; margin-bottom:10px;">Nombre del archivo en GitHub (Ej. foto1.jpg)</p>
+            <div class="input-line"><i class="fa-solid fa-image"></i><input type="text" id="ex-img" placeholder="URL o nombre de archivo"></div>
             <button class="btn-auth" id="btn-save-exercise" onclick="guardarEjercicio()">Agregar a la Base Técnica</button>
         </div>
     </div>
@@ -420,6 +407,7 @@
 
         let currentStudentId = null;
         window.currentRoutineData = '';
+        window.currentDietData = '';
 
         window.iniciarSesion = function() {
             const emailInput = document.getElementById('email').value;
@@ -467,9 +455,11 @@
             else if (screenId === 'screen-library') document.getElementById('nav-btn-library').classList.add('active');
         }
 
-        window.verPerfilAlumno = function(id, nombre, telefono, rutinaAsignada, mensualidad, estadoPago) {
+        window.verPerfilAlumno = function(id, nombre, telefono, rutinaAsignada, mensualidad, estadoPago, dietaAsignada) {
             currentStudentId = id; 
             window.currentRoutineData = rutinaAsignada ? decodeURIComponent(rutinaAsignada) : '';
+            window.currentDietData = dietaAsignada ? decodeURIComponent(dietaAsignada) : '';
+            
             document.getElementById('profile-name').innerText = nombre;
             document.getElementById('profile-id').innerText = "ID: RG-" + id.substring(0,4).toUpperCase();
             document.getElementById('profile-avatar').innerText = nombre.charAt(0).toUpperCase();
@@ -487,18 +477,30 @@
             document.getElementById('finance-amount').value = mensualidad || '';
             document.getElementById('finance-status').value = estadoPago || 'Pendiente';
             
-            const displayArea = document.getElementById('routine-display-area');
-            const btnAsignar = document.getElementById('btn-asignar-rutina');
-            const textContent = document.getElementById('routine-text-content');
+            // Render de Rutina
+            const dispRutina = document.getElementById('routine-display-area');
+            const btnRutina = document.getElementById('btn-asignar-rutina');
+            const txtRutina = document.getElementById('routine-text-content');
             if(window.currentRoutineData !== '') {
-                textContent.innerText = window.currentRoutineData;
-                displayArea.style.display = 'block';
-                btnAsignar.style.display = 'none';
+                txtRutina.innerText = window.currentRoutineData;
+                dispRutina.style.display = 'block'; btnRutina.style.display = 'none';
             } else {
-                textContent.innerText = "";
-                displayArea.style.display = 'none';
-                btnAsignar.style.display = 'flex';
+                txtRutina.innerText = "";
+                dispRutina.style.display = 'none'; btnRutina.style.display = 'flex';
             }
+
+            // Render de Dieta
+            const dispDieta = document.getElementById('diet-display-area');
+            const btnDieta = document.getElementById('btn-asignar-dieta');
+            const txtDieta = document.getElementById('diet-text-content');
+            if(window.currentDietData !== '') {
+                txtDieta.innerText = window.currentDietData;
+                dispDieta.style.display = 'block'; btnDieta.style.display = 'none';
+            } else {
+                txtDieta.innerText = "";
+                dispDieta.style.display = 'none'; btnDieta.style.display = 'flex';
+            }
+
             navTo('screen-student-profile');
         }
 
@@ -509,6 +511,10 @@
             document.getElementById('routine-input-area').value = window.currentRoutineData;
             abrirModal('modal-add-routine');
         }
+        window.abrirModalDieta = function() {
+            document.getElementById('diet-input-area').value = window.currentDietData;
+            abrirModal('modal-add-diet');
+        }
         window.abrirModalFinanzas = function() { abrirModal('modal-finance'); }
 
         window.guardarAlumno = async function() {
@@ -518,7 +524,7 @@
             if(!nombre) return alert("Nombre obligatorio.");
             btn.innerText = "Sincronizando..."; btn.style.opacity = "0.5";
             try {
-                await addDoc(collection(db, "alumnos"), { nombre: nombre, telefono: telefono, estado: "Activo", rutina: "", mensualidad: 0, estadoPago: "Pendiente", fechaIngreso: serverTimestamp() });
+                await addDoc(collection(db, "alumnos"), { nombre: nombre, telefono: telefono, estado: "Activo", rutina: "", dieta: "", mensualidad: 0, estadoPago: "Pendiente", fechaIngreso: serverTimestamp() });
                 document.getElementById('new-student-name').value = ''; document.getElementById('new-student-phone').value = '';
                 cerrarModal('modal-add-student');
                 btn.innerText = "Guardar en Nube"; btn.style.opacity = "1";
@@ -527,19 +533,34 @@
 
         window.guardarRutina = async function() {
             if(!currentStudentId) return;
-            const textoRutina = document.getElementById('routine-input-area').value;
+            const txt = document.getElementById('routine-input-area').value;
             const btn = document.getElementById('btn-save-routine');
-            btn.innerText = "Guardando Cambios..."; btn.style.opacity = "0.5";
+            btn.innerText = "Guardando..."; btn.style.opacity = "0.5";
             try {
-                const alumnoRef = doc(db, "alumnos", currentStudentId);
-                await updateDoc(alumnoRef, { rutina: textoRutina });
-                window.currentRoutineData = textoRutina;
-                document.getElementById('routine-text-content').innerText = textoRutina;
+                await updateDoc(doc(db, "alumnos", currentStudentId), { rutina: txt });
+                window.currentRoutineData = txt;
+                document.getElementById('routine-text-content').innerText = txt;
                 document.getElementById('btn-asignar-rutina').style.display = 'none';
                 document.getElementById('routine-display-area').style.display = 'block';
                 cerrarModal('modal-add-routine');
                 btn.innerText = "Guardar Cambios"; btn.style.opacity = "1";
-            } catch (e) { alert("Error al guardar."); btn.innerText = "Reintentar"; btn.style.opacity = "1"; }
+            } catch (e) { alert("Error."); btn.innerText = "Reintentar"; btn.style.opacity = "1"; }
+        }
+
+        window.guardarDieta = async function() {
+            if(!currentStudentId) return;
+            const txt = document.getElementById('diet-input-area').value;
+            const btn = document.getElementById('btn-save-diet');
+            btn.innerText = "Guardando..."; btn.style.opacity = "0.5";
+            try {
+                await updateDoc(doc(db, "alumnos", currentStudentId), { dieta: txt });
+                window.currentDietData = txt;
+                document.getElementById('diet-text-content').innerText = txt;
+                document.getElementById('btn-asignar-dieta').style.display = 'none';
+                document.getElementById('diet-display-area').style.display = 'block';
+                cerrarModal('modal-add-diet');
+                btn.innerText = "Guardar Nutrición"; btn.style.opacity = "1";
+            } catch (e) { alert("Error."); btn.innerText = "Reintentar"; btn.style.opacity = "1"; }
         }
 
         window.guardarFinanzas = async function() {
@@ -549,8 +570,7 @@
             const btn = document.getElementById('btn-save-finance');
             btn.innerText = "Actualizando..."; btn.style.opacity = "0.5";
             try {
-                const alumnoRef = doc(db, "alumnos", currentStudentId);
-                await updateDoc(alumnoRef, { mensualidad: Number(monto), estadoPago: estado });
+                await updateDoc(doc(db, "alumnos", currentStudentId), { mensualidad: Number(monto), estadoPago: estado });
                 document.getElementById('profile-mensualidad').innerText = `US$ ${monto ? monto : '0'}.00`;
                 const badgePago = document.getElementById('profile-estado-pago');
                 const bannerPago = document.getElementById('profile-finance-banner');
@@ -570,7 +590,6 @@
             const btn = document.getElementById('btn-save-exercise');
 
             if(!nombre || !musculo) return alert("Nombre y Músculo son obligatorios.");
-            
             if(!imgUrl) imgUrl = "https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?q=80&w=600&auto=format&fit=crop";
 
             btn.innerText = "Guardando..."; btn.style.opacity = "0.5";
@@ -585,11 +604,8 @@
 
         window.eliminarEjercicio = async function(id) {
             if(confirm("¿Seguro que deseas eliminar este ejercicio de tu base técnica?")) {
-                try {
-                    await deleteDoc(doc(db, "ejercicios", id));
-                } catch(e) {
-                    alert("No se pudo eliminar el ejercicio.");
-                }
+                try { await deleteDoc(doc(db, "ejercicios", id)); } 
+                catch(e) { alert("No se pudo eliminar el ejercicio."); }
             }
         }
 
@@ -614,12 +630,13 @@
                     const safeName = data.nombre.replace(/'/g, "\\'");
                     const safePhone = data.telefono ? data.telefono : '';
                     const safeRoutine = data.rutina ? encodeURIComponent(data.rutina) : '';
+                    const safeDiet = data.dieta ? encodeURIComponent(data.dieta) : '';
                     
                     if(data.estadoPago === "Pagado") { ingresosTotales += Number(data.mensualidad || 0); }
                     const statusColor = data.estadoPago === "Pagado" ? "var(--neon-green)" : "var(--card-yellow)";
 
                     list.innerHTML += `
-                    <div class="student-card" onclick="verPerfilAlumno('${id}', '${safeName}', '${safePhone}', '${safeRoutine}', '${data.mensualidad || 0}', '${data.estadoPago || "Pendiente"}')">
+                    <div class="student-card" onclick="verPerfilAlumno('${id}', '${safeName}', '${safePhone}', '${safeRoutine}', '${data.mensualidad || 0}', '${data.estadoPago || "Pendiente"}', '${safeDiet}')">
                         <div class="student-info-group">
                             <div class="student-avatar" style="border-color: ${statusColor}; color: ${statusColor};">${inicial}</div>
                             <div class="student-details">
@@ -639,12 +656,10 @@
             onSnapshot(q, (snapshot) => {
                 const list = document.getElementById('exercise-list');
                 list.innerHTML = ""; 
-
                 if(snapshot.empty) {
                     list.innerHTML = `<p style="text-align:center; color:#444; margin-top:40px; font-family:'Rajdhani'; font-size:18px; text-transform:uppercase;">Videoteca vacía</p>`;
                     return;
                 }
-
                 snapshot.forEach((docSnap) => {
                     const data = docSnap.data();
                     const id = docSnap.id;
