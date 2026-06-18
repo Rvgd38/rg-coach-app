@@ -22,44 +22,21 @@
             --card-yellow: #D49A36;
         }
 
-        /* CORRECCIÓN DE INTERACCIÓN PARA TECLADOS MÓVILES */
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; -webkit-tap-highlight-color: transparent; }
         input, textarea { -webkit-user-select: auto !important; user-select: auto !important; }
-        
         body { background-color: var(--bg-deep); color: var(--text-main); overflow-x: hidden; }
 
-        /* =========================================
-           PANTALLA DE LOGIN (RESTAURADA A PREMIUM)
-           ========================================= */
-        #login-screen {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
-            background: radial-gradient(circle at top right, #111 0%, var(--bg-deep) 100%);
-            display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 9999; padding: 20px;
-        }
-        .login-glass {
-            background: var(--glass-bg); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-            padding: 40px 30px; border-radius: 20px; width: 100%; max-width: 380px;
-            border: 1px solid var(--glass-border); box-shadow: 0 30px 60px rgba(0,0,0,0.8);
-            text-align: center;
-        }
-        .login-logo {
-            width: 80px; height: 80px; border-radius: 16px; margin: 0 auto 20px auto;
-            display: block; border: 1px solid #333; box-shadow: 0 0 20px rgba(57,255,20,0.15);
-            object-fit: cover;
-        }
+        /* LOGIN */
+        #login-screen { position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background: radial-gradient(circle at top right, #111 0%, var(--bg-deep) 100%); display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 9999; padding: 20px; }
+        .login-glass { background: var(--glass-bg); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); padding: 50px 30px; border-radius: 20px; width: 100%; max-width: 380px; border: 1px solid var(--glass-border); box-shadow: 0 30px 60px rgba(0,0,0,0.8); text-align: center; }
+        .login-logo { width: 80px; height: 80px; border-radius: 16px; margin: 0 auto 20px auto; display: block; border: 1px solid #333; box-shadow: 0 0 20px rgba(57,255,20,0.15); object-fit: cover; }
         .login-glass h2 { font-family: 'Rajdhani', sans-serif; font-size: 28px; margin-bottom: 5px; }
         .login-glass p { color: var(--text-sec); font-size: 13px; margin-bottom: 30px; text-transform: uppercase; letter-spacing: 1px;}
         .input-line { margin-bottom: 20px; border-bottom: 2px solid #333; position: relative; }
         .input-line i { position: absolute; left: 5px; top: 50%; transform: translateY(-50%); color: var(--text-sec); }
         .input-line input { width: 100%; background: transparent; border: none; color: #FFF; padding: 15px 15px 15px 35px; font-size: 15px; outline: none; transition: 0.3s; }
         .input-line input:focus { border-bottom-color: var(--neon-green); }
-        
-        .btn-auth {
-            width: 100%; background: linear-gradient(90deg, var(--neon-green), #25a80e);
-            color: #000; padding: 16px; border: none; border-radius: 12px; font-size: 16px; font-weight: 700;
-            cursor: pointer; text-transform: uppercase; transition: 0.3s; margin-top: 15px; letter-spacing: 1px;
-            box-shadow: 0 10px 20px rgba(57, 255, 20, 0.2);
-        }
+        .btn-auth { width: 100%; background: linear-gradient(90deg, var(--neon-green), #25a80e); color: #000; padding: 16px; border: none; border-radius: 12px; font-size: 16px; font-weight: 700; cursor: pointer; text-transform: uppercase; transition: 0.3s; margin-top: 15px; letter-spacing: 1px; box-shadow: 0 10px 20px rgba(57, 255, 20, 0.2); }
         .btn-auth:active { transform: scale(0.98); box-shadow: 0 5px 10px rgba(57, 255, 20, 0.4); }
 
         /* SCREENS */
@@ -118,9 +95,13 @@
         .finance-banner h4 { font-size: 13px; color: var(--text-sec); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px; }
         .finance-banner .value { font-family: 'Rajdhani', sans-serif; font-size: 32px; font-weight: 700; color: #FFF; }
         
-        /* CAJA DE VISUALIZACIÓN DE RUTINA */
-        .routine-display-box { background: rgba(255,255,255,0.02); border: 1px solid #222; border-radius: 12px; padding: 20px; margin-top: 15px; display: none; }
-        .routine-display-box pre { font-family: 'Inter', sans-serif; font-size: 14px; color: #DDD; white-space: pre-wrap; word-wrap: break-word; line-height: 1.6; }
+        /* CAJA DE VISUALIZACIÓN DE RUTINA CON BOTÓN EDITAR */
+        .routine-display-box { background: rgba(255,255,255,0.02); border: 1px solid #222; border-radius: 12px; padding: 20px; margin-top: 15px; display: none; position: relative;}
+        .routine-header-box { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; border-bottom: 1px solid #333; padding-bottom: 10px;}
+        .routine-header-box h4 { color: var(--neon-green); font-family: 'Rajdhani', sans-serif; font-size: 18px; text-transform: uppercase; margin: 0;}
+        .btn-edit-routine { background: transparent; border: 1px solid #444; color: var(--text-sec); border-radius: 8px; padding: 6px 12px; font-size: 12px; cursor: pointer; transition: 0.3s; display: flex; gap: 6px; align-items: center;}
+        .btn-edit-routine:active { border-color: var(--neon-green); color: var(--neon-green); }
+        .routine-display-box pre { font-family: 'Inter', sans-serif; font-size: 14px; color: #DDD; white-space: pre-wrap; word-wrap: break-word; line-height: 1.6; margin: 0; }
 
         /* LIBRERÍA DE EJERCICIOS */
         .library-tabs-modern { display: flex; gap: 30px; overflow-x: auto; margin-bottom: 30px; scrollbar-width: none; border-bottom: 1px solid #222; }
@@ -145,7 +126,7 @@
         .modal-header h3 { font-family: 'Rajdhani', sans-serif; font-size: 24px; color: var(--neon-green); }
         .close-modal { background: transparent; border: none; color: var(--text-sec); font-size: 24px; cursor: pointer; padding: 5px; }
         
-        textarea.routine-input { width: 100%; height: 200px; background: rgba(0,0,0,0.5); border: 1px solid #333; color: #FFF; padding: 15px; border-radius: 12px; font-size: 14px; outline: none; resize: none; margin-bottom: 20px; font-family: 'Inter', sans-serif; }
+        textarea.routine-input { width: 100%; height: 250px; background: rgba(0,0,0,0.5); border: 1px solid #333; color: #FFF; padding: 15px; border-radius: 12px; font-size: 14px; outline: none; resize: none; margin-bottom: 20px; font-family: 'Inter', sans-serif; }
         textarea.routine-input:focus { border-color: var(--neon-green); }
 
         /* NAVBAR INFERIOR */
@@ -272,7 +253,8 @@
 
         <!-- MÓDULO DE RUTINA -->
         <div class="metrics-grid" style="grid-template-columns: 1fr;">
-            <div class="metric-card large" onclick="abrirModal('modal-add-routine')">
+            <!-- Botón Asignar (Solo visible si NO hay rutina) -->
+            <div class="metric-card large" id="btn-asignar-rutina" onclick="abrirModalRutina()" style="cursor:pointer; display:none;">
                 <div class="metric-icon" style="margin-right: 20px;"><i class="fa-solid fa-file-waveform"></i></div>
                 <div style="flex:1;">
                     <div class="metric-value" style="font-size: 20px;">Protocolo Físico</div>
@@ -281,9 +263,12 @@
             </div>
         </div>
 
-        <!-- AQUÍ SE MOSTRARÁ LA RUTINA ASIGNADA -->
+        <!-- AQUÍ SE MUESTRA LA RUTINA (Con botón de edición) -->
         <div id="routine-display-area" class="routine-display-box">
-            <h4 style="color: var(--neon-green); margin-bottom: 10px; font-family: 'Rajdhani', sans-serif; font-size: 18px; text-transform: uppercase;">Rutina Actual</h4>
+            <div class="routine-header-box">
+                <h4>Rutina Actual</h4>
+                <button onclick="abrirModalRutina()" class="btn-edit-routine"><i class="fa-solid fa-pen"></i> Editar</button>
+            </div>
             <pre id="routine-text-content"></pre>
         </div>
     </div>
@@ -348,20 +333,20 @@
         </div>
     </div>
 
-    <!-- MODAL: ASIGNAR RUTINA -->
+    <!-- MODAL: ASIGNAR/EDITAR RUTINA -->
     <div id="modal-add-routine" class="modal-overlay">
         <div class="modal-content">
             <div class="modal-header">
-                <h3>Asignar Protocolo</h3>
+                <h3>Editor de Protocolo</h3>
                 <button class="close-modal" onclick="cerrarModal('modal-add-routine')"><i class="fa-solid fa-xmark"></i></button>
             </div>
-            <p style="color:var(--text-sec); font-size:12px; margin-bottom:15px; text-transform:uppercase;">Pega o escribe aquí la rutina de tu IA</p>
+            <p style="color:var(--text-sec); font-size:12px; margin-bottom:15px; text-transform:uppercase;">Puedes pegar o editar el texto libremente</p>
             <textarea id="routine-input-area" class="routine-input" placeholder="Ej: Día 1 - Pecho y Tríceps..."></textarea>
-            <button class="btn-auth" id="btn-save-routine" onclick="guardarRutina()">Asignar al Alumno</button>
+            <button class="btn-auth" id="btn-save-routine" onclick="guardarRutina()">Guardar Cambios</button>
         </div>
     </div>
 
-    <!-- NAVBAR INFERIOR -->
+    <!-- NAVBAR INFERIOR MODERNO -->
     <div class="bottom-nav-modern" id="bottom-nav" style="display: none;">
         <div class="nav-item-clean" id="nav-btn-library" onclick="navTo('screen-library')">
             <i class="fa-solid fa-database"></i><span>Base</span>
@@ -396,15 +381,15 @@
         const auth = getAuth(app);
         const db = getFirestore(app);
 
+        // Variables Globales
         let currentStudentId = null;
+        window.currentRoutineData = '';
 
         window.iniciarSesion = function() {
             const emailInput = document.getElementById('email').value;
             const passwordInput = document.getElementById('password').value;
             const btnAuth = document.getElementById('btnLogin');
-
             if(!emailInput || !passwordInput) return alert("⚠️ Ingresa credenciales.");
-
             btnAuth.innerText = "AUTENTICANDO..."; btnAuth.style.opacity = "0.5";
 
             signInWithEmailAndPassword(auth, emailInput, passwordInput)
@@ -419,7 +404,7 @@
                     }, 400);
                 })
                 .catch(() => {
-                    alert("⛔ ACCESO DENEGADO: Verifica tu correo y contraseña.");
+                    alert("⛔ ACCESO DENEGADO");
                     btnAuth.innerText = "INICIAR SESIÓN"; btnAuth.style.opacity = "1";
                 });
         }
@@ -428,15 +413,10 @@
             signOut(auth).then(() => {
                 document.querySelectorAll('.screen').forEach(s => s.style.display = 'none');
                 document.getElementById('bottom-nav').style.display = 'none';
-                
                 const login = document.getElementById('login-screen');
-                login.style.display = 'flex';
-                login.style.opacity = '1';
-                
-                document.getElementById('email').value = '';
-                document.getElementById('password').value = '';
-                document.getElementById('btnLogin').innerText = 'INICIAR SESIÓN';
-                document.getElementById('btnLogin').style.opacity = '1';
+                login.style.display = 'flex'; login.style.opacity = '1';
+                document.getElementById('email').value = ''; document.getElementById('password').value = '';
+                document.getElementById('btnLogin').innerText = 'INICIAR SESIÓN'; document.getElementById('btnLogin').style.opacity = '1';
             });
         }
 
@@ -444,15 +424,16 @@
             document.querySelectorAll('.screen').forEach(s => s.style.display = 'none');
             document.getElementById(screenId).style.display = 'block';
             window.scrollTo(0,0);
-
             document.querySelectorAll('.nav-item-clean').forEach(icon => icon.classList.remove('active'));
             if(screenId === 'screen-dashboard') document.getElementById('nav-btn-home').classList.add('active');
             else if (screenId === 'screen-students') document.getElementById('nav-btn-students').classList.add('active');
             else if (screenId === 'screen-library') document.getElementById('nav-btn-library').classList.add('active');
         }
 
+        // CARGA EL PERFIL Y DETERMINA SI MUESTRA BOTÓN DE ASIGNAR O PANEL DE EDICIÓN
         window.verPerfilAlumno = function(id, nombre, telefono, rutinaAsignada) {
             currentStudentId = id; 
+            window.currentRoutineData = rutinaAsignada ? decodeURIComponent(rutinaAsignada) : '';
             
             document.getElementById('profile-name').innerText = nombre;
             document.getElementById('profile-id').innerText = "ID: RG-" + id.substring(0,4).toUpperCase();
@@ -463,30 +444,36 @@
             else { btnWp.style.display = 'none'; }
             
             const displayArea = document.getElementById('routine-display-area');
+            const btnAsignar = document.getElementById('btn-asignar-rutina');
             const textContent = document.getElementById('routine-text-content');
             
-            if(rutinaAsignada && rutinaAsignada !== 'undefined' && rutinaAsignada !== '') {
-                textContent.innerText = decodeURIComponent(rutinaAsignada); 
+            if(window.currentRoutineData !== '') {
+                textContent.innerText = window.currentRoutineData;
                 displayArea.style.display = 'block';
+                btnAsignar.style.display = 'none';
             } else {
                 textContent.innerText = "";
                 displayArea.style.display = 'none';
+                btnAsignar.style.display = 'flex';
             }
-
             navTo('screen-student-profile');
         }
 
         window.abrirModal = function(modalId) { document.getElementById(modalId).style.display = 'flex'; }
         window.cerrarModal = function(modalId) { document.getElementById(modalId).style.display = 'none'; }
 
+        // ABRE EL MODAL DE RUTINA CON LOS DATOS PRE-CARGADOS PARA EDITAR
+        window.abrirModalRutina = function() {
+            document.getElementById('routine-input-area').value = window.currentRoutineData;
+            abrirModal('modal-add-routine');
+        }
+
         window.guardarAlumno = async function() {
             const nombre = document.getElementById('new-student-name').value;
             const telefono = document.getElementById('new-student-phone').value;
             const btn = document.getElementById('btn-save-student');
-
             if(!nombre) return alert("Nombre obligatorio.");
             btn.innerText = "Sincronizando..."; btn.style.opacity = "0.5";
-
             try {
                 await addDoc(collection(db, "alumnos"), { nombre: nombre, telefono: telefono, estado: "Activo", rutina: "", fechaIngreso: serverTimestamp() });
                 document.getElementById('new-student-name').value = ''; document.getElementById('new-student-phone').value = '';
@@ -497,24 +484,23 @@
 
         window.guardarRutina = async function() {
             if(!currentStudentId) return alert("Error: No hay alumno seleccionado.");
-            
             const textoRutina = document.getElementById('routine-input-area').value;
             const btn = document.getElementById('btn-save-routine');
 
-            if(!textoRutina) return alert("La rutina está vacía.");
-            btn.innerText = "Asignando..."; btn.style.opacity = "0.5";
-
+            btn.innerText = "Guardando Cambios..."; btn.style.opacity = "0.5";
             try {
                 const alumnoRef = doc(db, "alumnos", currentStudentId);
                 await updateDoc(alumnoRef, { rutina: textoRutina });
                 
-                document.getElementById('routine-input-area').value = '';
-                cerrarModal('modal-add-routine');
-                btn.innerText = "Asignar al Alumno"; btn.style.opacity = "1";
-                
+                // Actualiza memoria local y vista sin recargar
+                window.currentRoutineData = textoRutina;
                 document.getElementById('routine-text-content').innerText = textoRutina;
+                
+                document.getElementById('btn-asignar-rutina').style.display = 'none';
                 document.getElementById('routine-display-area').style.display = 'block';
                 
+                cerrarModal('modal-add-routine');
+                btn.innerText = "Guardar Cambios"; btn.style.opacity = "1";
             } catch (e) { alert("Error al guardar la rutina."); btn.innerText = "Reintentar"; btn.style.opacity = "1"; }
         }
 
@@ -524,12 +510,10 @@
                 const list = document.getElementById('students-list');
                 list.innerHTML = ""; 
                 document.getElementById('dashboard-student-count').innerText = snapshot.size;
-
                 if(snapshot.empty) {
                     list.innerHTML = `<p style="text-align:center; color:#444; margin-top:40px; font-family:'Rajdhani'; font-size:18px; text-transform:uppercase;">Base de datos vacía</p>`;
                     return;
                 }
-
                 snapshot.forEach((doc) => {
                     const data = doc.data();
                     const id = doc.id;
@@ -537,7 +521,6 @@
                     const safeName = data.nombre.replace(/'/g, "\\'");
                     const safePhone = data.telefono ? data.telefono : '';
                     const safeRoutine = data.rutina ? encodeURIComponent(data.rutina) : '';
-                    
                     list.innerHTML += `
                     <div class="student-card" onclick="verPerfilAlumno('${id}', '${safeName}', '${safePhone}', '${safeRoutine}')">
                         <div class="student-info-group">
