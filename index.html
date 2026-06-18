@@ -101,22 +101,28 @@
         .btn-edit-routine:active { border-color: var(--neon-green); color: var(--neon-green); }
         .routine-display-box pre { font-family: 'Inter', sans-serif; font-size: 14px; color: #DDD; white-space: pre-wrap; word-wrap: break-word; line-height: 1.6; margin: 0; }
 
-        /* LIBRERÍA DE EJERCICIOS */
+        /* =========================================
+           LIBRERÍA DE EJERCICIOS (NUEVO ENCUADRE DE FOTOS)
+           ========================================= */
         .library-tabs-modern { display: flex; gap: 30px; overflow-x: auto; margin-bottom: 30px; scrollbar-width: none; border-bottom: 1px solid #222; }
         .library-tabs-modern::-webkit-scrollbar { display: none; }
         .tab-clean { padding-bottom: 15px; color: var(--text-sec); font-size: 15px; font-weight: 600; white-space: nowrap; cursor: pointer; position: relative; text-transform: uppercase; letter-spacing: 1px;}
         .tab-clean.active { color: var(--text-main); }
         .tab-clean.active::after { content: ''; position: absolute; bottom: -1px; left: 0; width: 100%; height: 2px; background: var(--neon-green); box-shadow: 0 -2px 10px var(--neon-glow);}
         
-        .cinematic-card { position: relative; height: 180px; border-radius: 16px; margin-bottom: 20px; overflow: hidden; display: flex; align-items: flex-end; padding: 20px; border: 1px solid #222; }
-        .cinematic-card::before { content: ''; position: absolute; top:0; left:0; width:100%; height:100%; background: linear-gradient(to top, rgba(0,0,0,0.95) 10%, rgba(0,0,0,0.2) 100%); z-index: 1; }
-        .cine-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; filter: grayscale(30%); }
-        .cine-content { position: relative; z-index: 2; width: 100%; display: flex; justify-content: space-between; align-items: flex-end;}
-        .cine-info h4 { font-family: 'Rajdhani', sans-serif; font-size: 26px; font-weight: 700; color: #FFF; margin-bottom: 8px; line-height: 1.1; text-transform: uppercase;}
-        .cine-tags { display: flex; gap: 10px; }
-        .cine-tag { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--neon-green); }
+        /* Modificado: Altura mayor (240px) para mostrar más cuerpo en fotos verticales */
+        .cinematic-card { position: relative; height: 240px; border-radius: 16px; margin-bottom: 20px; overflow: hidden; display: flex; align-items: flex-end; padding: 20px; border: 1px solid #222; }
+        .cinematic-card::before { content: ''; position: absolute; top:0; left:0; width:100%; height:100%; background: linear-gradient(to top, rgba(0,0,0,0.95) 10%, rgba(0,0,0,0.1) 100%); z-index: 1; }
         
-        /* BOTÓN ELIMINAR EJERCICIO */
+        /* Modificado: object-position: center 20% enfoca el rostro y pecho, no el estómago */
+        .cine-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 20%; z-index: 0; filter: grayscale(10%); transition: 0.5s; }
+        .cinematic-card:active .cine-bg { transform: scale(1.05); filter: grayscale(0%); }
+
+        .cine-content { position: relative; z-index: 2; width: 100%; display: flex; justify-content: space-between; align-items: flex-end;}
+        .cine-info h4 { font-family: 'Rajdhani', sans-serif; font-size: 26px; font-weight: 700; color: #FFF; margin-bottom: 8px; line-height: 1.1; text-transform: uppercase; text-shadow: 0 2px 10px rgba(0,0,0,0.8);}
+        .cine-tags { display: flex; gap: 10px; }
+        .cine-tag { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--neon-green); background: rgba(0,0,0,0.8); padding: 3px 8px; border-radius: 4px;}
+        
         .btn-delete-ex { position: absolute; top: 15px; right: 15px; background: rgba(204, 51, 51, 0.8); color: #FFF; border: none; border-radius: 8px; width: 35px; height: 35px; display: flex; justify-content: center; align-items: center; z-index: 10; cursor: pointer; backdrop-filter: blur(5px); transition: 0.3s;}
         .btn-delete-ex:active { transform: scale(0.9); background: #cc3333; }
 
@@ -195,7 +201,7 @@
                     <div class="metric-title">EVALUACIONES</div>
                 </div>
             </div>
-            <div class="metric-card large" onclick="navTo('screen-library')">
+            <div class="metric-card large" onclick="navTo('screen-library')" style="cursor:pointer;">
                 <div class="metric-icon" style="margin-right: 20px;"><i class="fa-solid fa-dumbbell"></i></div>
                 <div style="flex:1;">
                     <div class="metric-value" style="font-size: 24px;">Base Técnica</div>
@@ -302,8 +308,6 @@
     </div>
 
     <!-- MODALES -->
-    
-    <!-- Modal: Alumno -->
     <div id="modal-add-student" class="modal-overlay">
         <div class="modal-content">
             <div class="modal-header">
@@ -322,7 +326,6 @@
         </div>
     </div>
 
-    <!-- Modal: Rutina -->
     <div id="modal-add-routine" class="modal-overlay">
         <div class="modal-content">
             <div class="modal-header">
@@ -335,7 +338,6 @@
         </div>
     </div>
 
-    <!-- Modal: Finanzas -->
     <div id="modal-finance" class="modal-overlay">
         <div class="modal-content">
             <div class="modal-header">
@@ -354,7 +356,6 @@
         </div>
     </div>
 
-    <!-- Modal: Agregar Ejercicio -->
     <div id="modal-add-exercise" class="modal-overlay">
         <div class="modal-content">
             <div class="modal-header">
@@ -376,7 +377,7 @@
             <p style="color:var(--text-sec); font-size:11px; margin-bottom:10px;">URL de imagen (Déjalo en blanco para usar la genérica)</p>
             <div class="input-line">
                 <i class="fa-solid fa-image"></i>
-                <input type="text" id="ex-img" placeholder="URL o nombre de archivo (ej. foto1.jpg)">
+                <input type="text" id="ex-img" placeholder="Nombre de archivo (ej. mifoto.jpeg)">
             </div>
             <button class="btn-auth" id="btn-save-exercise" onclick="guardarEjercicio()">Agregar a la Base Técnica</button>
         </div>
@@ -570,7 +571,6 @@
 
             if(!nombre || !musculo) return alert("Nombre y Músculo son obligatorios.");
             
-            // IMAGEN POR DEFECTO SI ESTÁ VACÍO
             if(!imgUrl) imgUrl = "https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?q=80&w=600&auto=format&fit=crop";
 
             btn.innerText = "Guardando..."; btn.style.opacity = "0.5";
@@ -583,7 +583,6 @@
             } catch (e) { alert("Error de conexión."); btn.innerText = "Reintentar"; btn.style.opacity = "1"; }
         }
 
-        // FUNCION PARA ELIMINAR EJERCICIOS DUPLICADOS
         window.eliminarEjercicio = async function(id) {
             if(confirm("¿Seguro que deseas eliminar este ejercicio de tu base técnica?")) {
                 try {
@@ -651,7 +650,7 @@
                     const id = docSnap.id;
                     list.innerHTML += `
                     <div class="cinematic-card">
-                        <button class="btn-delete-ex" onclick="eliminarEjercicio('${id}')" title="Eliminar"><i class="fa-solid fa-trash"></i></button>
+                        <button class="btn-delete-ex" onclick="event.stopPropagation(); eliminarEjercicio('${id}')" title="Eliminar"><i class="fa-solid fa-trash"></i></button>
                         <img src="${data.imgUrl}" class="cine-bg" onerror="this.src='https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?q=80&w=600&auto=format&fit=crop'">
                         <div class="cine-content">
                             <div class="cine-info">
