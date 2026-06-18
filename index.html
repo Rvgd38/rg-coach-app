@@ -12,14 +12,9 @@
 
     <style>
         :root {
-            --bg-deep: #030303;
-            --glass-bg: rgba(15, 15, 15, 0.7);
-            --glass-border: rgba(255, 255, 255, 0.05);
-            --neon-green: #39FF14;
-            --neon-glow: rgba(57, 255, 20, 0.2);
-            --text-main: #FFFFFF;
-            --text-sec: #999999;
-            --card-yellow: #D49A36;
+            --bg-deep: #030303; --glass-bg: rgba(15, 15, 15, 0.7); --glass-border: rgba(255, 255, 255, 0.05);
+            --neon-green: #39FF14; --neon-glow: rgba(57, 255, 20, 0.2); --text-main: #FFFFFF; --text-sec: #999999;
+            --card-yellow: #D49A36; --card-red: #cc3333;
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; -webkit-tap-highlight-color: transparent; }
@@ -81,7 +76,7 @@
         .btn-primary { width: 100%; background: var(--text-main); color: #000; padding: 18px; border: none; border-radius: 12px; font-size: 15px; font-weight: 700; display: flex; justify-content: center; align-items: center; gap: 10px; margin-top: 30px; cursor: pointer; transition: 0.3s; text-transform: uppercase; letter-spacing: 1px;}
         .btn-primary:active { background: var(--neon-green); }
 
-        /* PERFIL ALUMNO */
+        /* PERFIL ALUMNO Y FINANZAS */
         .profile-header-card { padding: 0 0 30px 0; border-bottom: 1px solid #222; margin-bottom: 30px; position: relative; }
         .profile-status { position: absolute; top: 0; right: 0; font-size: 11px; font-weight: 700; color: var(--bg-deep); background: var(--neon-green); padding: 4px 12px; border-radius: 6px; letter-spacing: 1px; text-transform: uppercase;}
         .profile-main-info { display: flex; align-items: center; gap: 25px; margin-bottom: 25px; }
@@ -91,11 +86,15 @@
         .btn-whatsapp { background: transparent; border: 1px solid var(--neon-green); color: var(--neon-green); width: 100%; padding: 15px; border-radius: 12px; font-size: 14px; font-weight: 600; display: flex; justify-content: center; align-items: center; gap: 10px; cursor: pointer; text-decoration: none; text-transform: uppercase; letter-spacing: 1px; transition: 0.3s;}
         .btn-whatsapp:active { background: var(--neon-green); color: #000; }
         
-        .finance-banner { background: #111; padding: 25px; border-left: 4px solid var(--card-yellow); border-radius: 16px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; }
+        /* TARJETA FINANCIERA INTERACTIVA */
+        .finance-banner { background: #111; padding: 25px; border-left: 4px solid var(--card-yellow); border-radius: 16px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; cursor: pointer; transition: 0.3s;}
+        .finance-banner:active { transform: scale(0.98); }
+        .finance-banner.pagado { border-left-color: var(--neon-green); }
+        .finance-banner.pagado .badge-pending { color: var(--neon-green); }
         .finance-banner h4 { font-size: 13px; color: var(--text-sec); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px; }
         .finance-banner .value { font-family: 'Rajdhani', sans-serif; font-size: 32px; font-weight: 700; color: #FFF; }
-        
-        /* CAJA DE VISUALIZACIÓN DE RUTINA CON BOTÓN EDITAR */
+        .badge-pending { color: var(--card-yellow); font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; }
+
         .routine-display-box { background: rgba(255,255,255,0.02); border: 1px solid #222; border-radius: 12px; padding: 20px; margin-top: 15px; display: none; position: relative;}
         .routine-header-box { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; border-bottom: 1px solid #333; padding-bottom: 10px;}
         .routine-header-box h4 { color: var(--neon-green); font-family: 'Rajdhani', sans-serif; font-size: 18px; text-transform: uppercase; margin: 0;}
@@ -128,6 +127,8 @@
         
         textarea.routine-input { width: 100%; height: 250px; background: rgba(0,0,0,0.5); border: 1px solid #333; color: #FFF; padding: 15px; border-radius: 12px; font-size: 14px; outline: none; resize: none; margin-bottom: 20px; font-family: 'Inter', sans-serif; }
         textarea.routine-input:focus { border-color: var(--neon-green); }
+        
+        select.finance-select { width: 100%; background: rgba(0,0,0,0.5); border: 1px solid #333; color: #FFF; padding: 15px; border-radius: 12px; font-size: 15px; outline: none; margin-bottom: 20px; }
 
         /* NAVBAR INFERIOR */
         .bottom-nav-modern { position: fixed; bottom: 0; left: 0; width: 100%; background: rgba(5,5,5,0.95); backdrop-filter: blur(20px); border-top: 1px solid #1a1a1a; display: flex; justify-content: space-around; padding: 15px 0 25px 0; z-index: 1000; }
@@ -164,15 +165,16 @@
                 <h2>Comando Central</h2>
                 <h1>Coach <span>Rodolfo</span></h1>
             </div>
-            <div class="profile-btn" onclick="cerrarSesion()" title="Cerrar Sesión"><i class="fa-solid fa-power-off"></i></div>
+            <div class="profile-btn" onclick="cerrarSesion()" title="Cerrar Sesión"><i class="fa-solid fa-power-off" style="font-size: 16px;"></i></div>
         </div>
 
         <div class="finance-core">
             <div class="finance-core-content">
                 <i class="fa-solid fa-chart-line core-icon" style="color: rgba(255,255,255,0.1); position:absolute; right:10px; top:10px; font-size:50px;"></i>
                 <p>Ingresos del Período</p>
-                <h3>US$ 0,00</h3>
-                <div class="trend" style="display:inline-flex; align-items:center; gap:5px; background:var(--neon-glow); color:var(--neon-green); padding:4px 10px; border-radius:20px; font-size:12px; font-weight:600; margin-top:10px;"><i class="fa-solid fa-check"></i> Sistema Activo</div>
+                <!-- CONTADOR FINANCIERO DINÁMICO -->
+                <h3 id="dashboard-income">US$ 0,00</h3>
+                <div class="trend" style="display:inline-flex; align-items:center; gap:5px; background:var(--neon-glow); color:var(--neon-green); padding:4px 10px; border-radius:20px; font-size:12px; font-weight:600; margin-top:10px;"><i class="fa-solid fa-check"></i> Calculado en Tiempo Real</div>
             </div>
         </div>
 
@@ -246,14 +248,17 @@
             </a>
         </div>
 
-        <div class="finance-banner">
-            <div><h4>Mensualidad</h4><div class="value">US$ 80,00</div></div>
-            <div class="badge-pending" style="color:#D49A36;">PENDIENTE</div>
+        <!-- TARJETA FINANCIERA AHORA ES CLICKEABLE -->
+        <div class="finance-banner" id="profile-finance-banner" onclick="abrirModalFinanzas()">
+            <div>
+                <h4>Mensualidad</h4>
+                <div class="value" id="profile-mensualidad">US$ 0,00</div>
+            </div>
+            <div class="badge-pending" id="profile-estado-pago">PENDIENTE</div>
         </div>
 
         <!-- MÓDULO DE RUTINA -->
         <div class="metrics-grid" style="grid-template-columns: 1fr;">
-            <!-- Botón Asignar (Solo visible si NO hay rutina) -->
             <div class="metric-card large" id="btn-asignar-rutina" onclick="abrirModalRutina()" style="cursor:pointer; display:none;">
                 <div class="metric-icon" style="margin-right: 20px;"><i class="fa-solid fa-file-waveform"></i></div>
                 <div style="flex:1;">
@@ -263,7 +268,6 @@
             </div>
         </div>
 
-        <!-- AQUÍ SE MUESTRA LA RUTINA (Con botón de edición) -->
         <div id="routine-display-area" class="routine-display-box">
             <div class="routine-header-box">
                 <h4>Rutina Actual</h4>
@@ -296,16 +300,6 @@
                     <div class="cine-info">
                         <h4>Crunch Polea Alta</h4>
                         <div class="cine-tags"><span class="cine-tag">ABDOMEN</span> <span class="cine-tag">• HIPERTROFIA</span></div>
-                    </div>
-                    <div class="cine-icon"><i class="fa-solid fa-play"></i></div>
-                </div>
-            </div>
-            <div class="cinematic-card">
-                <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=600&auto=format&fit=crop" class="cine-bg">
-                <div class="cine-content">
-                    <div class="cine-info">
-                        <h4>Sentadilla Búlgara</h4>
-                        <div class="cine-tags"><span class="cine-tag">GLÚTEO</span> <span class="cine-tag">• AISLAMIENTO</span></div>
                     </div>
                     <div class="cine-icon"><i class="fa-solid fa-play"></i></div>
                 </div>
@@ -346,7 +340,30 @@
         </div>
     </div>
 
-    <!-- NAVBAR INFERIOR MODERNO -->
+    <!-- MODAL: CONTROL FINANCIERO -->
+    <div id="modal-finance" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Control Financiero</h3>
+                <button class="close-modal" onclick="cerrarModal('modal-finance')"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <p style="color:var(--text-sec); font-size:12px; margin-bottom:15px; text-transform:uppercase;">Estado de pago y mensualidad</p>
+            
+            <div class="input-line">
+                <i class="fa-solid fa-dollar-sign"></i>
+                <input type="number" id="finance-amount" placeholder="Monto mensual (Ej. 80)">
+            </div>
+            
+            <select id="finance-status" class="finance-select">
+                <option value="Pendiente">PENDIENTE</option>
+                <option value="Pagado">PAGADO</option>
+            </select>
+
+            <button class="btn-auth" id="btn-save-finance" onclick="guardarFinanzas()">Actualizar Estado</button>
+        </div>
+    </div>
+
+    <!-- NAVBAR INFERIOR -->
     <div class="bottom-nav-modern" id="bottom-nav" style="display: none;">
         <div class="nav-item-clean" id="nav-btn-library" onclick="navTo('screen-library')">
             <i class="fa-solid fa-database"></i><span>Base</span>
@@ -381,7 +398,6 @@
         const auth = getAuth(app);
         const db = getFirestore(app);
 
-        // Variables Globales
         let currentStudentId = null;
         window.currentRoutineData = '';
 
@@ -389,7 +405,9 @@
             const emailInput = document.getElementById('email').value;
             const passwordInput = document.getElementById('password').value;
             const btnAuth = document.getElementById('btnLogin');
+
             if(!emailInput || !passwordInput) return alert("⚠️ Ingresa credenciales.");
+
             btnAuth.innerText = "AUTENTICANDO..."; btnAuth.style.opacity = "0.5";
 
             signInWithEmailAndPassword(auth, emailInput, passwordInput)
@@ -430,19 +448,40 @@
             else if (screenId === 'screen-library') document.getElementById('nav-btn-library').classList.add('active');
         }
 
-        // CARGA EL PERFIL Y DETERMINA SI MUESTRA BOTÓN DE ASIGNAR O PANEL DE EDICIÓN
-        window.verPerfilAlumno = function(id, nombre, telefono, rutinaAsignada) {
+        // CARGAR PERFIL (AHORA INCLUYE FINANZAS)
+        window.verPerfilAlumno = function(id, nombre, telefono, rutinaAsignada, mensualidad, estadoPago) {
             currentStudentId = id; 
             window.currentRoutineData = rutinaAsignada ? decodeURIComponent(rutinaAsignada) : '';
             
+            // Textos básicos
             document.getElementById('profile-name').innerText = nombre;
             document.getElementById('profile-id').innerText = "ID: RG-" + id.substring(0,4).toUpperCase();
             document.getElementById('profile-avatar').innerText = nombre.charAt(0).toUpperCase();
             
+            // WhatsApp
             const btnWp = document.getElementById('profile-whatsapp');
             if(telefono && telefono !== 'undefined') { btnWp.href = `https://wa.me/${telefono}`; btnWp.style.display = 'flex'; } 
             else { btnWp.style.display = 'none'; }
             
+            // Renderizado de Finanzas
+            document.getElementById('profile-mensualidad').innerText = `US$ ${mensualidad ? mensualidad : '0'}.00`;
+            const badgePago = document.getElementById('profile-estado-pago');
+            const bannerPago = document.getElementById('profile-finance-banner');
+            
+            badgePago.innerText = estadoPago || "PENDIENTE";
+            if (estadoPago === "Pagado") {
+                bannerPago.classList.add('pagado');
+                badgePago.style.color = "var(--neon-green)";
+            } else {
+                bannerPago.classList.remove('pagado');
+                badgePago.style.color = "var(--card-yellow)";
+            }
+
+            // Precarga de inputs en Modal de Finanzas
+            document.getElementById('finance-amount').value = mensualidad || '';
+            document.getElementById('finance-status').value = estadoPago || 'Pendiente';
+            
+            // Renderizado de Rutina
             const displayArea = document.getElementById('routine-display-area');
             const btnAsignar = document.getElementById('btn-asignar-rutina');
             const textContent = document.getElementById('routine-text-content');
@@ -462,26 +501,37 @@
         window.abrirModal = function(modalId) { document.getElementById(modalId).style.display = 'flex'; }
         window.cerrarModal = function(modalId) { document.getElementById(modalId).style.display = 'none'; }
 
-        // ABRE EL MODAL DE RUTINA CON LOS DATOS PRE-CARGADOS PARA EDITAR
         window.abrirModalRutina = function() {
             document.getElementById('routine-input-area').value = window.currentRoutineData;
             abrirModal('modal-add-routine');
         }
+        
+        window.abrirModalFinanzas = function() {
+            abrirModal('modal-finance');
+        }
 
+        // GUARDAR ALUMNO (Con finanzas iniciales)
         window.guardarAlumno = async function() {
             const nombre = document.getElementById('new-student-name').value;
             const telefono = document.getElementById('new-student-phone').value;
             const btn = document.getElementById('btn-save-student');
+
             if(!nombre) return alert("Nombre obligatorio.");
             btn.innerText = "Sincronizando..."; btn.style.opacity = "0.5";
+
             try {
-                await addDoc(collection(db, "alumnos"), { nombre: nombre, telefono: telefono, estado: "Activo", rutina: "", fechaIngreso: serverTimestamp() });
+                await addDoc(collection(db, "alumnos"), { 
+                    nombre: nombre, telefono: telefono, estado: "Activo", rutina: "", 
+                    mensualidad: 0, estadoPago: "Pendiente",
+                    fechaIngreso: serverTimestamp() 
+                });
                 document.getElementById('new-student-name').value = ''; document.getElementById('new-student-phone').value = '';
                 cerrarModal('modal-add-student');
                 btn.innerText = "Guardar en Nube"; btn.style.opacity = "1";
             } catch (e) { alert("Error de conexión."); btn.innerText = "Reintentar"; btn.style.opacity = "1"; }
         }
 
+        // GUARDAR RUTINA
         window.guardarRutina = async function() {
             if(!currentStudentId) return alert("Error: No hay alumno seleccionado.");
             const textoRutina = document.getElementById('routine-input-area').value;
@@ -491,29 +541,62 @@
             try {
                 const alumnoRef = doc(db, "alumnos", currentStudentId);
                 await updateDoc(alumnoRef, { rutina: textoRutina });
-                
-                // Actualiza memoria local y vista sin recargar
                 window.currentRoutineData = textoRutina;
                 document.getElementById('routine-text-content').innerText = textoRutina;
-                
                 document.getElementById('btn-asignar-rutina').style.display = 'none';
                 document.getElementById('routine-display-area').style.display = 'block';
-                
                 cerrarModal('modal-add-routine');
                 btn.innerText = "Guardar Cambios"; btn.style.opacity = "1";
-            } catch (e) { alert("Error al guardar la rutina."); btn.innerText = "Reintentar"; btn.style.opacity = "1"; }
+            } catch (e) { alert("Error al guardar."); btn.innerText = "Reintentar"; btn.style.opacity = "1"; }
         }
 
+        // GUARDAR FINANZAS
+        window.guardarFinanzas = async function() {
+            if(!currentStudentId) return;
+            const monto = document.getElementById('finance-amount').value;
+            const estado = document.getElementById('finance-status').value;
+            const btn = document.getElementById('btn-save-finance');
+
+            btn.innerText = "Actualizando..."; btn.style.opacity = "0.5";
+            try {
+                const alumnoRef = doc(db, "alumnos", currentStudentId);
+                await updateDoc(alumnoRef, { mensualidad: Number(monto), estadoPago: estado });
+                
+                // Actualiza visualmente el perfil al instante
+                document.getElementById('profile-mensualidad').innerText = `US$ ${monto ? monto : '0'}.00`;
+                const badgePago = document.getElementById('profile-estado-pago');
+                const bannerPago = document.getElementById('profile-finance-banner');
+                badgePago.innerText = estado.toUpperCase();
+                if (estado === "Pagado") {
+                    bannerPago.classList.add('pagado');
+                    badgePago.style.color = "var(--neon-green)";
+                } else {
+                    bannerPago.classList.remove('pagado');
+                    badgePago.style.color = "var(--card-yellow)";
+                }
+
+                cerrarModal('modal-finance');
+                btn.innerText = "Actualizar Estado"; btn.style.opacity = "1";
+            } catch (e) { alert("Error al actualizar."); btn.innerText = "Reintentar"; btn.style.opacity = "1"; }
+        }
+
+        // CARGAR ALUMNOS Y CALCULAR FINANZAS GLOBALES
         function cargarAlumnosTiempoReal() {
             const q = query(collection(db, "alumnos"), orderBy("fechaIngreso", "desc"));
             onSnapshot(q, (snapshot) => {
                 const list = document.getElementById('students-list');
                 list.innerHTML = ""; 
+                
                 document.getElementById('dashboard-student-count').innerText = snapshot.size;
+                
+                let ingresosTotales = 0; // Calculadora de ganancias
+
                 if(snapshot.empty) {
                     list.innerHTML = `<p style="text-align:center; color:#444; margin-top:40px; font-family:'Rajdhani'; font-size:18px; text-transform:uppercase;">Base de datos vacía</p>`;
+                    document.getElementById('dashboard-income').innerText = `US$ 0,00`;
                     return;
                 }
+
                 snapshot.forEach((doc) => {
                     const data = doc.data();
                     const id = doc.id;
@@ -521,10 +604,19 @@
                     const safeName = data.nombre.replace(/'/g, "\\'");
                     const safePhone = data.telefono ? data.telefono : '';
                     const safeRoutine = data.rutina ? encodeURIComponent(data.rutina) : '';
+                    
+                    // Cálculo de ingresos (Suma solo si el estado es "Pagado")
+                    if(data.estadoPago === "Pagado") {
+                        ingresosTotales += Number(data.mensualidad || 0);
+                    }
+                    
+                    // Color indicador en la lista según estado de pago
+                    const statusColor = data.estadoPago === "Pagado" ? "var(--neon-green)" : "var(--card-yellow)";
+
                     list.innerHTML += `
-                    <div class="student-card" onclick="verPerfilAlumno('${id}', '${safeName}', '${safePhone}', '${safeRoutine}')">
+                    <div class="student-card" onclick="verPerfilAlumno('${id}', '${safeName}', '${safePhone}', '${safeRoutine}', '${data.mensualidad || 0}', '${data.estadoPago || "Pendiente"}')">
                         <div class="student-info-group">
-                            <div class="student-avatar">${inicial}</div>
+                            <div class="student-avatar" style="border-color: ${statusColor}; color: ${statusColor};">${inicial}</div>
                             <div class="student-details">
                                 <h3>${data.nombre}</h3>
                                 <p>ID: RG-26-${id.substring(0,4).toUpperCase()}</p>
@@ -533,6 +625,9 @@
                         <i class="fa-solid fa-arrow-right" style="color:#333;"></i>
                     </div>`;
                 });
+
+                // Actualizar Dashboard Financiero
+                document.getElementById('dashboard-income').innerText = `US$ ${ingresosTotales},00`;
             });
         }
     </script>
