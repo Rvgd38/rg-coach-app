@@ -54,7 +54,6 @@
         
         .metrics-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 30px; }
         .metric-card { background: transparent; border: 1px solid #222; padding: 25px; border-radius: 16px; display: flex; flex-direction: column; justify-content: space-between; min-height: 140px; border-left: 3px solid #333; transition: 0.3s; }
-        /* CORRECCIÓN Z-INDEX AQUÍ PARA MÓVILES */
         .metric-card.large { grid-column: span 2; min-height: auto; flex-direction: row; align-items: center; border-left: 3px solid var(--neon-green); background: rgba(57, 255, 20, 0.05); cursor: pointer; position: relative; z-index: 50; }
         .metric-icon { font-size: 24px; color: var(--text-sec); margin-bottom: 15px;}
         .metric-icon.green { color: var(--neon-green); }
@@ -80,14 +79,18 @@
         /* PERFIL ALUMNO Y FINANZAS */
         .profile-header-card { padding: 0 0 30px 0; border-bottom: 1px solid #222; margin-bottom: 30px; position: relative; }
         .profile-status { position: absolute; top: 0; right: 0; font-size: 11px; font-weight: 700; color: var(--bg-deep); background: var(--neon-green); padding: 4px 12px; border-radius: 6px; letter-spacing: 1px; text-transform: uppercase;}
+        
+        /* Botón de configuración/edición del alumno */
+        .btn-config-student { position: absolute; bottom: 30px; right: 0; background: transparent; border: 1px solid #444; color: var(--text-main); width: 40px; height: 40px; border-radius: 10px; display: flex; justify-content: center; align-items: center; font-size: 16px; cursor: pointer; transition: 0.3s;}
+        .btn-config-student:active { border-color: var(--neon-green); color: var(--neon-green); }
+
         .profile-main-info { display: flex; align-items: center; gap: 25px; margin-bottom: 25px; }
         .profile-avatar-big { width: 80px; height: 80px; background: #111; display: flex; justify-content: center; align-items: center; font-family: 'Rajdhani', sans-serif; font-size: 38px; font-weight: 700; color: var(--text-main); border: 1px solid #333; border-radius: 50%; }
-        .profile-name h2 { font-size: 28px; margin-bottom: 5px; }
+        .profile-name h2 { font-size: 28px; margin-bottom: 5px; padding-right: 40px;}
         .profile-name p { color: var(--text-sec); font-size: 14px; text-transform: uppercase; letter-spacing: 1px;}
         .btn-whatsapp { background: transparent; border: 1px solid var(--neon-green); color: var(--neon-green); width: 100%; padding: 15px; border-radius: 12px; font-size: 14px; font-weight: 600; display: flex; justify-content: center; align-items: center; gap: 10px; cursor: pointer; text-decoration: none; text-transform: uppercase; letter-spacing: 1px; transition: 0.3s;}
         .btn-whatsapp:active { background: var(--neon-green); color: #000; }
         
-        /* Z-INDEX CORREGIDO PARA BANNER FINANCIERO */
         .finance-banner { background: #111; padding: 25px; border-left: 4px solid var(--card-yellow); border-radius: 16px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; cursor: pointer; transition: 0.3s; position: relative; z-index: 50;}
         .finance-banner:active { transform: scale(0.98); }
         .finance-banner.pagado { border-left-color: var(--neon-green); }
@@ -134,7 +137,7 @@
         .modal-header h3 { font-family: 'Rajdhani', sans-serif; font-size: 24px; color: var(--neon-green); }
         .close-modal { background: transparent; border: none; color: var(--text-sec); font-size: 24px; cursor: pointer; padding: 5px; }
         
-        textarea.routine-input { width: 100%; height: 150px; background: rgba(0,0,0,0.5); border: 1px solid #333; color: #FFF; padding: 15px; border-radius: 12px; font-size: 14px; outline: none; resize: none; margin-bottom: 20px; font-family: 'Inter', sans-serif; }
+        textarea.routine-input { width: 100%; height: 250px; background: rgba(0,0,0,0.5); border: 1px solid #333; color: #FFF; padding: 15px; border-radius: 12px; font-size: 14px; outline: none; resize: none; margin-bottom: 20px; font-family: 'Inter', sans-serif; }
         textarea.routine-input:focus { border-color: var(--neon-green); }
         select.finance-select { width: 100%; background: rgba(0,0,0,0.5); border: 1px solid #333; color: #FFF; padding: 15px; border-radius: 12px; font-size: 15px; outline: none; margin-bottom: 20px; }
 
@@ -167,7 +170,7 @@
                 <h2>Comando Central</h2>
                 <h1>Coach <span>Rodolfo</span></h1>
             </div>
-            <div class="profile-btn" onclick="cerrarSesion()" title="Cerrar Sesión"><i class="fa-solid fa-power-off" style="font-size: 16px;"></i></div>
+            <div class="profile-btn" onclick="cerrarSesion()" title="Cerrar Sesión"><i class="fa-solid fa-power-off"></i></div>
         </div>
 
         <div class="finance-core">
@@ -236,6 +239,9 @@
             <a href="#" id="profile-whatsapp" target="_blank" class="btn-whatsapp">
                 <i class="fa-brands fa-whatsapp" style="font-size:18px;"></i> Iniciar Chat
             </a>
+            
+            <!-- BOTÓN PARA EDITAR / ELIMINAR ALUMNO -->
+            <button class="btn-config-student" onclick="abrirModalEdicionAlumno()"><i class="fa-solid fa-gear"></i></button>
         </div>
 
         <div class="finance-banner" id="profile-finance-banner" onclick="abrirModalFinanzas()">
@@ -281,7 +287,7 @@
                 <div class="metric-icon" style="margin-right: 20px; color: var(--card-cyan); background: rgba(0, 229, 255, 0.15);"><i class="fa-solid fa-heart-pulse"></i></div>
                 <div style="flex:1;">
                     <div class="metric-value" style="font-size: 20px;">Evaluación Física</div>
-                    <div class="metric-title" style="margin-top: 5px;">Registrar peso, % grasa y anamnesis</div>
+                    <div class="metric-title" style="margin-top: 5px;">Registrar peso, % grasa y notas</div>
                 </div>
             </div>
             <div id="eval-display-area" class="routine-display-box" style="border-left-color: var(--card-cyan);">
@@ -293,7 +299,7 @@
                     <div class="eval-data"><small>Peso Corporal</small><span id="eval-peso">--</span> kg</div>
                     <div class="eval-data"><small>Grasa Est.</small><span id="eval-grasa">--</span> %</div>
                 </div>
-                <p style="color:var(--text-sec); font-size:12px; margin-bottom:5px; text-transform:uppercase;">Notas Clínicas / Anamnesis:</p>
+                <p style="color:var(--text-sec); font-size:12px; margin-bottom:5px; text-transform:uppercase;">Notas Clínicas (Lesiones, patologías, estrés)</p>
                 <pre id="eval-text-content" style="color:#FFF; background: #000; padding:10px; border-radius:8px; border:1px solid #333;"></pre>
             </div>
         </div>
@@ -309,21 +315,31 @@
             <div class="profile-btn" style="color: var(--neon-green); border-color: var(--neon-green);"><i class="fa-solid fa-database"></i></div>
         </div>
         <div class="library-tabs-modern">
-            <div class="tab-clean">Protocolos</div>
             <div class="tab-clean active">Ejercicios</div>
-            <div class="tab-clean">Nutrición</div>
         </div>
-        <div id="exercise-list"><p style="text-align:center; color:#444; margin-top:40px; font-family:'Rajdhani'; font-size:18px; text-transform:uppercase;">Cargando base técnica...</p></div>
+        <div id="exercise-list"><p style="text-align:center; color:#444; margin-top:40px;">Cargando base técnica...</p></div>
         <button class="btn-primary" style="margin-top:10px;" onclick="abrirModal('modal-add-exercise')">Registrar Nuevo Movimiento</button>
     </div>
 
     <!-- MODALES -->
+    
+    <!-- Modal Agregar Alumno -->
     <div id="modal-add-student" class="modal-overlay">
         <div class="modal-content">
             <div class="modal-header"><h3>Nuevo Expediente</h3><button class="close-modal" onclick="cerrarModal('modal-add-student')"><i class="fa-solid fa-xmark"></i></button></div>
             <div class="input-line"><i class="fa-solid fa-user"></i><input type="text" id="new-student-name" placeholder="Nombre completo"></div>
             <div class="input-line"><i class="fa-brands fa-whatsapp"></i><input type="number" id="new-student-phone" placeholder="WhatsApp (ej. 58414...)"></div>
             <button class="btn-auth" id="btn-save-student" onclick="guardarAlumno()">Guardar en Nube</button>
+        </div>
+    </div>
+
+    <!-- Modal Editar / Eliminar Alumno -->
+    <div id="modal-edit-student" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header"><h3>Configuración Alumno</h3><button class="close-modal" onclick="cerrarModal('modal-edit-student')"><i class="fa-solid fa-xmark"></i></button></div>
+            <div class="input-line"><i class="fa-solid fa-user"></i><input type="text" id="edit-student-name" placeholder="Editar Nombre"></div>
+            <button class="btn-auth" onclick="actualizarNombreAlumno()">Guardar Nombre</button>
+            <button class="btn-auth" style="background: var(--card-red); margin-top: 15px;" onclick="eliminarAlumno()">🗑️ ELIMINAR ALUMNO</button>
         </div>
     </div>
 
@@ -396,6 +412,9 @@
         const firebaseConfig = { apiKey: "AIzaSyAy4lOulqCr8jHTiwpmn8YBP3ATNbP68d4", authDomain: "rg-coach-app.firebaseapp.com", projectId: "rg-coach-app", storageBucket: "rg-coach-app.firebasestorage.app", messagingSenderId: "836257101109", appId: "1:836257101109:web:e34f6578981d9ed632087c" };
         const app = initializeApp(firebaseConfig); const auth = getAuth(app); const db = getFirestore(app);
 
+        // MEMORIA GLOBAL SEGURA (EVITA EL BUG DEL CLIC MÓVIL)
+        window.alumnosDataMap = {};
+        
         let currentStudentId = null;
         window.currentRoutineData = ''; window.currentDietData = ''; window.currentEval = { peso: '', grasa: '', notas: '' };
 
@@ -422,22 +441,26 @@
             else if (screenId === 'screen-library') document.getElementById('nav-btn-library').classList.add('active');
         }
 
-        window.verPerfilAlumno = function(id, nombre, telefono, rutinaAsignada, mensualidad, estadoPago, dietaAsignada, peso, grasa, notas) {
+        // CARGA EL PERFIL DESDE LA MEMORIA SEGURA
+        window.verPerfilAlumno = function(id) {
+            const data = window.alumnosDataMap[id];
+            if(!data) return;
+
             currentStudentId = id; 
-            window.currentRoutineData = rutinaAsignada ? decodeURIComponent(rutinaAsignada) : '';
-            window.currentDietData = dietaAsignada ? decodeURIComponent(dietaAsignada) : '';
-            window.currentEval = { peso: peso ? decodeURIComponent(peso) : '', grasa: grasa ? decodeURIComponent(grasa) : '', notas: notas ? decodeURIComponent(notas) : '' };
+            window.currentRoutineData = data.rutina || '';
+            window.currentDietData = data.dieta || '';
+            window.currentEval = { peso: data.peso || '', grasa: data.grasa || '', notas: data.anamnesis || '' };
             
-            document.getElementById('profile-name').innerText = decodeURIComponent(nombre);
-            document.getElementById('profile-id').innerText = "ID: RG-" + id.substring(0,4).toUpperCase();
-            document.getElementById('profile-avatar').innerText = decodeURIComponent(nombre).charAt(0).toUpperCase();
+            document.getElementById('profile-name').innerText = data.nombre;
+            document.getElementById('profile-id').innerText = "ID: RG-26-" + id.substring(0,4).toUpperCase();
+            document.getElementById('profile-avatar').innerText = data.nombre.charAt(0).toUpperCase();
             const btnWp = document.getElementById('profile-whatsapp');
-            if(telefono && telefono !== 'undefined') { btnWp.href = `https://wa.me/${telefono}`; btnWp.style.display = 'flex'; } else { btnWp.style.display = 'none'; }
+            if(data.telefono) { btnWp.href = `https://wa.me/${data.telefono}`; btnWp.style.display = 'flex'; } else { btnWp.style.display = 'none'; }
             
-            document.getElementById('profile-mensualidad').innerText = `US$ ${mensualidad ? mensualidad : '0'}.00`;
+            document.getElementById('profile-mensualidad').innerText = `US$ ${data.mensualidad || '0'}.00`;
             const badgePago = document.getElementById('profile-estado-pago'); const bannerPago = document.getElementById('profile-finance-banner');
-            badgePago.innerText = estadoPago || "PENDIENTE";
-            if (estadoPago === "Pagado") { bannerPago.classList.add('pagado'); badgePago.style.color = "var(--neon-green)"; } else { bannerPago.classList.remove('pagado'); badgePago.style.color = "var(--card-yellow)"; }
+            badgePago.innerText = data.estadoPago || "PENDIENTE";
+            if (data.estadoPago === "Pagado") { bannerPago.classList.add('pagado'); badgePago.style.color = "var(--neon-green)"; } else { bannerPago.classList.remove('pagado'); badgePago.style.color = "var(--card-yellow)"; }
 
             renderBox('routine', window.currentRoutineData);
             renderBox('diet', window.currentDietData);
@@ -472,11 +495,42 @@
         window.abrirModalDieta = function() { document.getElementById('diet-input-area').value = window.currentDietData; abrirModal('modal-add-diet'); }
         window.abrirModalFinanzas = function() { document.getElementById('finance-amount').value = document.getElementById('profile-mensualidad').innerText.replace(/\D/g,'')/100 || ''; document.getElementById('finance-status').value = document.getElementById('profile-estado-pago').innerText === 'PAGADO' ? 'Pagado' : 'Pendiente'; abrirModal('modal-finance'); }
         window.abrirModalEval = function() { document.getElementById('eval-input-peso').value = window.currentEval.peso; document.getElementById('eval-input-grasa').value = window.currentEval.grasa; document.getElementById('eval-input-notas').value = window.currentEval.notas; abrirModal('modal-add-eval'); }
+        
+        // MODAL EDICION DE ALUMNO
+        window.abrirModalEdicionAlumno = function() {
+            const data = window.alumnosDataMap[currentStudentId];
+            document.getElementById('edit-student-name').value = data.nombre;
+            abrirModal('modal-edit-student');
+        }
 
         window.guardarAlumno = async function() {
             const nombre = document.getElementById('new-student-name').value; const telefono = document.getElementById('new-student-phone').value; const btn = document.getElementById('btn-save-student');
             if(!nombre) return alert("Nombre obligatorio."); btn.innerText = "Sincronizando..."; btn.style.opacity = "0.5";
             try { await addDoc(collection(db, "alumnos"), { nombre: nombre, telefono: telefono, estado: "Activo", rutina: "", dieta: "", peso: "", grasa: "", anamnesis: "", mensualidad: 0, estadoPago: "Pendiente", fechaIngreso: serverTimestamp() }); document.getElementById('new-student-name').value = ''; document.getElementById('new-student-phone').value = ''; cerrarModal('modal-add-student'); btn.innerText = "Guardar en Nube"; btn.style.opacity = "1"; } catch (e) { alert("Error."); btn.innerText = "Reintentar"; btn.style.opacity = "1"; }
+        }
+
+        // EDITAR NOMBRE ALUMNO
+        window.actualizarNombreAlumno = async function() {
+            const nuevoNombre = document.getElementById('edit-student-name').value;
+            if(!nuevoNombre || !currentStudentId) return;
+            try {
+                await updateDoc(doc(db, "alumnos", currentStudentId), { nombre: nuevoNombre });
+                document.getElementById('profile-name').innerText = nuevoNombre;
+                document.getElementById('profile-avatar').innerText = nuevoNombre.charAt(0).toUpperCase();
+                cerrarModal('modal-edit-student');
+            } catch(e) { alert("Error al actualizar"); }
+        }
+
+        // ELIMINAR ALUMNO
+        window.eliminarAlumno = async function() {
+            if(!currentStudentId) return;
+            if(confirm("⚠️ ¿Estás seguro de ELIMINAR a este alumno? Toda su rutina y pagos se borrarán para siempre.")) {
+                try {
+                    await deleteDoc(doc(db, "alumnos", currentStudentId));
+                    cerrarModal('modal-edit-student');
+                    navTo('screen-students'); // Lo devuelve a la lista
+                } catch(e) { alert("Error al eliminar"); }
+            }
         }
 
         window.guardarRutina = async function() { await guardarDatosGenericos('routine-input-area', 'btn-save-routine', 'rutina', 'currentRoutineData', 'routine'); }
@@ -500,34 +554,31 @@
             if(!currentStudentId) return;
             const monto = document.getElementById('finance-amount').value; const estado = document.getElementById('finance-status').value; const btn = document.getElementById('btn-save-finance');
             btn.innerText = "Actualizando..."; btn.style.opacity = "0.5";
-            try { await updateDoc(doc(db, "alumnos", currentStudentId), { mensualidad: Number(monto), estadoPago: estado }); cerrarModal('modal-finance'); btn.innerText = "Actualizar Estado"; btn.style.opacity = "1"; } catch (e) { alert("Error al actualizar."); btn.innerText = "Reintentar"; btn.style.opacity = "1"; }
+            try { await updateDoc(doc(db, "alumnos", currentStudentId), { mensualidad: Number(monto), estadoPago: estado }); cerrarModal('modal-finance'); btn.innerText = "Actualizar Estado"; btn.style.opacity = "1"; } catch (e) { alert("Error."); btn.innerText = "Reintentar"; btn.style.opacity = "1"; }
         }
-
-        window.guardarEjercicio = async function() {
-            const nombre = document.getElementById('ex-name').value; const musculo = document.getElementById('ex-muscle').value; const enfoque = document.getElementById('ex-focus').value; let imgUrl = document.getElementById('ex-img').value; const btn = document.getElementById('btn-save-exercise');
-            if(!nombre || !musculo) return alert("Nombre y Músculo obligatorios."); if(!imgUrl) imgUrl = "https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?q=80&w=600&auto=format&fit=crop";
-            btn.innerText = "Guardando..."; btn.style.opacity = "0.5";
-            try { await addDoc(collection(db, "ejercicios"), { nombre: nombre, musculo: musculo, enfoque: enfoque, imgUrl: imgUrl, fechaCreacion: serverTimestamp() }); document.getElementById('ex-name').value = ''; document.getElementById('ex-muscle').value = ''; document.getElementById('ex-focus').value = ''; document.getElementById('ex-img').value = ''; cerrarModal('modal-add-exercise'); btn.innerText = "Agregar a la Base Técnica"; btn.style.opacity = "1"; } catch (e) { alert("Error."); btn.innerText = "Reintentar"; btn.style.opacity = "1"; }
-        }
-
-        window.eliminarEjercicio = async function(id) { if(confirm("¿Eliminar este ejercicio?")) { try { await deleteDoc(doc(db, "ejercicios", id)); } catch(e) { alert("Error al eliminar."); } } }
 
         function cargarAlumnosTiempoReal() {
             const q = query(collection(db, "alumnos"), orderBy("fechaIngreso", "desc"));
             onSnapshot(q, (snapshot) => {
-                const list = document.getElementById('students-list'); list.innerHTML = ""; document.getElementById('dashboard-student-count').innerText = snapshot.size; let ingresosTotales = 0;
+                const list = document.getElementById('students-list'); list.innerHTML = ""; 
+                document.getElementById('dashboard-student-count').innerText = snapshot.size; 
+                let ingresosTotales = 0;
+
                 if(snapshot.empty) { list.innerHTML = `<p style="text-align:center; color:#444; margin-top:40px; font-family:'Rajdhani'; font-size:18px; text-transform:uppercase;">Base de datos vacía</p>`; document.getElementById('dashboard-income').innerText = `US$ 0,00`; return; }
+                
                 snapshot.forEach((doc) => {
-                    const data = doc.data(); const id = doc.id; const inicial = data.nombre.charAt(0).toUpperCase();
-                    const safeName = data.nombre ? encodeURIComponent(data.nombre) : ''; const safePhone = data.telefono ? data.telefono : '';
-                    const safeRoutine = data.rutina ? encodeURIComponent(data.rutina) : ''; const safeDiet = data.dieta ? encodeURIComponent(data.dieta) : '';
-                    const sPeso = data.peso ? encodeURIComponent(data.peso) : ''; const sGrasa = data.grasa ? encodeURIComponent(data.grasa) : ''; const sNotas = data.anamnesis ? encodeURIComponent(data.anamnesis) : '';
+                    const data = doc.data(); 
+                    const id = doc.id; 
                     
+                    // ALMACENAMIENTO SEGURO EN MEMORIA (Evita el bug del móvil)
+                    window.alumnosDataMap[id] = data;
+
+                    const inicial = data.nombre.charAt(0).toUpperCase();
                     if(data.estadoPago === "Pagado") { ingresosTotales += Number(data.mensualidad || 0); }
                     const statusColor = data.estadoPago === "Pagado" ? "var(--neon-green)" : "var(--card-yellow)";
 
                     list.innerHTML += `
-                    <div class="student-card" onclick="verPerfilAlumno('${id}', '${safeName}', '${safePhone}', '${safeRoutine}', '${data.mensualidad || 0}', '${data.estadoPago || "Pendiente"}', '${safeDiet}', '${sPeso}', '${sGrasa}', '${sNotas}')">
+                    <div class="student-card" onclick="verPerfilAlumno('${id}')">
                         <div class="student-info-group">
                             <div class="student-avatar" style="border-color: ${statusColor}; color: ${statusColor};">${inicial}</div>
                             <div class="student-details"><h3>${data.nombre}</h3><p>ID: RG-26-${id.substring(0,4).toUpperCase()}</p></div>
@@ -536,26 +587,6 @@
                     </div>`;
                 });
                 document.getElementById('dashboard-income').innerText = `US$ ${ingresosTotales},00`;
-            });
-        }
-
-        function cargarEjerciciosTiempoReal() {
-            const q = query(collection(db, "ejercicios"), orderBy("fechaCreacion", "desc"));
-            onSnapshot(q, (snapshot) => {
-                const list = document.getElementById('exercise-list'); list.innerHTML = ""; 
-                if(snapshot.empty) { list.innerHTML = `<p style="text-align:center; color:#444; margin-top:40px; font-family:'Rajdhani'; font-size:18px; text-transform:uppercase;">Videoteca vacía</p>`; return; }
-                snapshot.forEach((docSnap) => {
-                    const data = docSnap.data(); const id = docSnap.id;
-                    list.innerHTML += `
-                    <div class="cinematic-card">
-                        <button class="btn-delete-ex" onclick="event.stopPropagation(); eliminarEjercicio('${id}')" title="Eliminar"><i class="fa-solid fa-trash"></i></button>
-                        <img src="${data.imgUrl}" class="cine-bg" onerror="this.src='https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?q=80&w=600&auto=format&fit=crop'">
-                        <div class="cine-content">
-                            <div class="cine-info"><h4>${data.nombre}</h4><div class="cine-tags"><span class="cine-tag">${data.musculo}</span>${data.enfoque ? `<span class="cine-tag">• ${data.enfoque}</span>` : ''}</div></div>
-                            <div class="cine-icon"><i class="fa-solid fa-play"></i></div>
-                        </div>
-                    </div>`;
-                });
             });
         }
     </script>
